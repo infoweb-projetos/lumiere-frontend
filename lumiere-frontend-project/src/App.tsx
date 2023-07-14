@@ -3,7 +3,7 @@ import { Horse, Heart, Cube } from '@phosphor-icons/react';
 function App() {
   return (
     <>
-      <div className="text-3xl font-bold content-center flex justify-center items-center h-screen">
+      <div className="flex h-screen content-center items-center justify-center text-3xl font-bold">
         <p className="bg-blue-400">
           Tailwind funcionou, Baixe a extensão Tailwind CSS IntelliSense
           <br />
