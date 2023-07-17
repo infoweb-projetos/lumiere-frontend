@@ -30,6 +30,7 @@ export default {
         800: '#252932', // gray-800
         600: '#4B4E57', // gray -600
         400: '#9498A1', // gray-400
+        300: '#C0C0C0', // gray-400
         200: '#E8E9ED', // gray-200
       },
       semantic: {
