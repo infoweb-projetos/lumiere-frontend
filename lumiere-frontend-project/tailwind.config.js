@@ -1,12 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
-    extend: {},
     extend: {
       boxShadow: {
         white: '0px 5px 15px -3px rgba(232, 233, 237, 0.05)', // shadow-white
@@ -42,6 +37,9 @@ export default {
         green: '#4AA254', // semantic-green
         yellow: '#E4E458', // semantic-yellow
       },
+      yellow: {
+        500: '#C19851', //yellow-500
+      },
     },
     fontFamily: {
       dm: ['DM Serif Display', 'serif'], // font-dm
@@ -49,4 +47,4 @@ export default {
     },
   },
   plugins: [],
-}
+};
