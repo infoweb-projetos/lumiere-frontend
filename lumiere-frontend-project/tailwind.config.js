@@ -31,6 +31,7 @@ export default {
         600: '#4B4E57', // gray -600
         400: '#9498A1', // gray-400
         200: '#E8E9ED', // gray-200
+        100: "#393E49",
       },
       semantic: {
         red: '#C95336', // semantic-red
@@ -40,6 +41,10 @@ export default {
       yellow: {
         500: '#C19851', //yellow-500
       },
+      blue:{
+        800: "#2F5CAF", //blue-500
+        600: "#2B364F",
+      }
     },
     fontFamily: {
       dm: ['DM Serif Display', 'serif'], // font-dm
