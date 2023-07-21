@@ -1,16 +1,14 @@
-import { Menu } from './components/menu';
+import { MenuLogin } from './components/menu/menu-login';
+import { MenuNoLogin } from './components/menu/menu-no-login';
 
 function App() {
+  const a = false;
   return (
     <>
-      <Menu />
+      {a ? <MenuNoLogin /> : <MenuLogin />}
+
       {/*  */}
-      <div className="mt-16 flex h-[1000px] flex-col content-center items-center bg-gray-200 p-8 text-3xl font-bold">
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, quam nulla obcaecati in dolorem saepe
-          nostrum nemo numquam sit ipsa, illo voluptatibus facilis. Repellat, sed ipsa fugit velit cumque doloribus.
-        </p>
-      </div>
+      <div className="mt-16 flex h-[1000px] flex-col content-center items-center bg-gray-200 p-8 text-3xl font-bold"></div>
     </>
   );
 }
