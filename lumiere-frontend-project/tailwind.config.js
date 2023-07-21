@@ -31,7 +31,9 @@ export default {
         600: '#4B4E57', // gray -600
         400: '#9498A1', // gray-400
         200: '#E8E9ED', // gray-200
+
         100: "#393E49",
+
       },
       semantic: {
         red: '#C95336', // semantic-red
