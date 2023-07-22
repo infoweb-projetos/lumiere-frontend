@@ -1,16 +1,33 @@
-import { Button_blue } from './components/buttons/button-blue-icon';
-import { ButtonYellow } from './components/buttons/button-yellow-icon';
-import { Button_ghost_dark} from './components/buttons/button-ghost-dark';
-import { Button_ghost_light} from './components/buttons/button-ghost-light';
+import { MenuLogin } from './components/menu/menu-login';
+import { MenuNoLogin } from './components/menu/menu-no-login';
+import { DisplayTitulo } from './components/texts/display-sm/titulo';
+import { MontH1 } from './components/texts/monteserrat/h1';
+import { MontP } from './components/texts/monteserrat/p';
 
 function App() {
+  const a = false;
   return (
     <>
-      <div className="text-3xl font-bold content-center flex justify-center items-center h-screen gap-8">
-        <Button_blue title="Button" size="sm" type={'button'} />
-        <Button_ghost_dark title="Button" size="sm" type={'button'} />
-        <Button_ghost_light title="Button" size="sm" type={'button'} />
-        <ButtonYellow title="Button" size="xl" />
+      {a ? <MenuNoLogin /> : <MenuLogin />}
+
+      {/*  */}
+      <div className="mt-16 flex h-[1000px] flex-col content-center items-center bg-gray-200 p-8 text-3xl font-bold">
+        <div className="space-y-8">
+          <DisplayTitulo>Melhores Advogados</DisplayTitulo>
+          <MontH1>Advogados</MontH1>
+          <MontP>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi possimus dolor dolorem corporis officiis
+            voluptas saepe odio placeat aliquam, iusto fugit ut, in doloremque dolorum recusandae eaque provident iste
+            a.
+          </MontP>
+          <MontP className=" text-right text-semantic-red">Erro no console</MontP>
+          <MontH1>Lawyers</MontH1>
+          <MontP>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi possimus dolor dolorem corporis officiis
+            voluptas saepe odio placeat aliquam, iusto fugit ut, in doloremque dolorum recusandae eaque provident iste
+            a.
+          </MontP>
+        </div>
       </div>
     </>
   );
