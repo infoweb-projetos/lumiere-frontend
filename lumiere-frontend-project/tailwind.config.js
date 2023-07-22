@@ -29,11 +29,13 @@ export default {
       gray: {
         800: '#252932', // gray-800
         600: '#4B4E57', // gray -600
+        500: '#BDBDBD', // gray-500
         400: '#9498A1', // gray-400
+        300: '#C0C0C0', // gray-300
+
         200: '#E8E9ED', // gray-200
 
-        100: "#393E49",
-
+        100: '#393E49',
       },
       semantic: {
         red: '#C95336', // semantic-red
@@ -43,10 +45,10 @@ export default {
       yellow: {
         500: '#C19851', //yellow-500
       },
-      blue:{
-        800: "#2F5CAF", //blue-500
-        600: "#2B364F",
-      }
+      blue: {
+        800: '#2F5CAF', //blue-500
+        600: '#2B364F',
+      },
     },
     fontFamily: {
       dm: ['DM Serif Display', 'serif'], // font-dm
