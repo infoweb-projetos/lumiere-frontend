@@ -40,6 +40,7 @@ export default {
         200: '#E8E9ED', // gray-200
 
         100: '#393E49',
+        50: "#CBC4C4",
       },
       semantic: {
         red: '#C95336', // semantic-red
