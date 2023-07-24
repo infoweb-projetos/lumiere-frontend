@@ -7,6 +7,9 @@ export default {
         white: '0px 5px 15px -3px rgba(232, 233, 237, 0.05)', // shadow-white
         black: '0px 5px 15px -3px rgba(0, 0, 0, 0.05)', // shadow-black
       },
+      width: {
+        '128': 'fit-content',
+      }
     },
     fontSize: {
       sm: '1rem', // font-sm (info)
@@ -18,6 +21,7 @@ export default {
       '5xl': '3.5rem', // font-5xl (tittle-dm-display)
     },
     colors: {
+      "white" : "#FFFFFF",
       primary: {
         800: '#0D1D37', // primary-500
         500: '#1D3F7E', // primary-800
