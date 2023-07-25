@@ -257,7 +257,7 @@ const Cadastro = () => {
             </div>
             <div className="flex w-full flex-col">
               <Label forLabel="cnpj">CNPJ</Label>
-              <InputText erro={false} placeholder="cnpj" name="cnpj" value={cnpjMask(cnpj)} onChange={setCnpj} />
+              <InputText erro={false} placeholder="CNPJ" name="cnpj" value={cnpjMask(cnpj)} onChange={setCnpj} />
               <MontInfo className="text-semantic-red">{validationFormErrorSecond.cnpj}</MontInfo>
             </div>
             <Button_blue size="sm" title="Continuar" type="submit" />
