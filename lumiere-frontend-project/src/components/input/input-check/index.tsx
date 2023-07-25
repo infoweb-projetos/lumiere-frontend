@@ -4,9 +4,11 @@ import { IInput } from '../input.interface';
 interface IInputCheckbox extends IInput {
   placeholder: string;
   value?: string;
+  // eslint-disable-next-line no-unused-vars
+  onChange: (e: boolean) => void;
 }
 
-export const InputCheckbox = ({ placeholder, className, name, value, erro = true }: IInputCheckbox) => {
+export const InputCheckbox = ({ placeholder, className, name, value, erro = true, onChange }: IInputCheckbox) => {
   return (
     <div className="relative">
       <label htmlFor={name}>
@@ -19,6 +21,7 @@ export const InputCheckbox = ({ placeholder, className, name, value, erro = true
         type={'checkbox'}
         id={name}
         name={name}
+        onChange={(e) => onChange(e.target.checked)}
         value={value && value}
         className={`required:border-red-500 relative z-0 h-6 w-6 appearance-none rounded border-[1px] bg-gray-200 transition-all checked:bg-primary-800  ${
           className ? className : ''
