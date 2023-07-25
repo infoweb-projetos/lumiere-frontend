@@ -260,7 +260,7 @@ const Cadastro = () => {
               <InputText erro={false} placeholder="CNPJ" name="cnpj" value={cnpjMask(cnpj)} onChange={setCnpj} />
               <MontInfo className="text-semantic-red">{validationFormErrorSecond.cnpj}</MontInfo>
             </div>
-            <Button_blue size="sm" title="Continuar" type="submit" />
+            <Button_blue size="sm" title="Quero ser advogado!" type="submit" />
           </form>
         )}
       </div>
