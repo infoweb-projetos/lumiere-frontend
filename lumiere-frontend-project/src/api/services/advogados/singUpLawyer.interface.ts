@@ -1,10 +1,11 @@
 export interface SignUpLawyer {
   email: string;
-  password: string;
-  passwordConfirm: string;
+  // password: string;
+  // passwordConfirm: string;
   cnpj: string;
-  historico: string;
+  historico: string | null;
   nome: string;
+  areaDeAtuacao: null;
 }
 
 export interface SignUpLawyerResponse {

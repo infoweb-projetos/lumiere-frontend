@@ -16,6 +16,7 @@ import { ApiError, SignUpLawyerResponse } from '../../api/services/advogados/sin
 import { DisplayH1 } from '../../components/texts/display-sm/h1';
 import * as Switch from '@radix-ui/react-switch';
 
+
 const Cadastro = () => {
   const [fase, setFase] = useState(1);
 
@@ -135,22 +136,22 @@ const Cadastro = () => {
       signUpLawyerMutation.mutate({
         email: email,
         nome: name,
-        cnpj: cnpj,
-        historico: descricao,
-        password: password,
-        passwordConfirm: passwordConfirm,
+        cnpj: cnpjMask(cnpj),
+        historico: null,
+        areaDeAtuacao: null,
       });
     }
   }
 
-  function cnpjMask(value: string) {
-    return value
-      .replace(/\D+/g, '') // não deixa ser digitado nenhuma letra
-      .replace(/(\d{2})(\d)/, '$1.$2') // captura 2 grupos de número o primeiro com 2 digitos e o segundo de com 3 digitos, apos capturar o primeiro grupo ele adiciona um ponto antes do segundo grupo de número
+  function cnpjMask(value:string) {
+    const onlyDigits = value.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
+    const formattedCnpj = onlyDigits
+      .slice(0, 14) // Limita o CNPJ a 14 dígitos
+      .replace(/(\d{2})(\d)/, '$1.$2') // Aplica a formatação com pontos e barras
       .replace(/(\d{3})(\d)/, '$1.$2')
-      .replace(/(\d{3})(\d)/, '$1/$2') // captura 2 grupos de número o primeiro e o segundo com 3 digitos, separados por /
-      .replace(/(\d{4})(\d)/, '$1-$2')
-      .replace(/(-\d{2})\d+?$/, '$1'); // captura os dois últimos 2 números, com um - antes dos dois números
+      .replace(/(\d{3})(\d)/, '$1/$2')
+      .replace(/(\d{4})(\d)/, '$1-$2');
+    return formattedCnpj;
   }
 
   return (

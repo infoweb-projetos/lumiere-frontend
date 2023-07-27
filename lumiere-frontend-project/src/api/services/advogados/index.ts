@@ -3,19 +3,15 @@ import { SignUpLawyer, SignUpLawyerResponse } from './singUpLawyer.interface';
 
 export const signUpLawyer = async ({
   email,
-  password,
   nome,
-  passwordConfirm,
   cnpj,
-  historico,
 }: SignUpLawyer): Promise<SignUpLawyerResponse> => {
   const user = await axiosInstance.post<SignUpLawyerResponse>('/advogado', {
     email,
-    password,
-    passwordConfirm,
     nome,
     cnpj,
-    historico,
+    historico: null,
+    areaDeAtuacao: null,
   });
 
   return user.data;
