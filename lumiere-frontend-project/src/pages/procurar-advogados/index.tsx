@@ -13,24 +13,33 @@ interface PropsAdvs{
     historico: string,
     areaDeAtuacao: string,
 }
+interface PropsOptions{
+    value: string,
+    label: string,
+}
 export default function ProcurarAdvogados () {
     const [search, setSearch] = useState("");
-    const [optionsAdvs, setOptionsAdvs] = useState<string[]>([]);
+    const [optionsAdvs, setOptionsAdvs] = useState<PropsOptions[]>([]);
 
     const api = axios.create({
         baseURL: 'http://localhost:3000'
     })
     const [advs, setAdvs] = useState([])
-
     useEffect(() => {
     async function loadAdvs() {
       const response = await api.get('/advogado')
       
 
       setAdvs(response.data)
+      const newOptionsAdvs = response.data.map((adv: PropsAdvs) => ({
+        value: adv.nome,
+        label: adv.nome
+    }));
 
+    setOptionsAdvs(newOptionsAdvs); 
     }
     loadAdvs()
+    
   }, [])
 
   const filtro = advs.filter((adv : PropsAdvs) => adv.nome.toLowerCase().includes(search.toLowerCase()));
@@ -40,14 +49,15 @@ export default function ProcurarAdvogados () {
             <div className="flex flex-col items-center">
                 <div className="w-fit"><DisplayH1>Procurar advogados</DisplayH1></div>
                 <div className="border-2 border-gray-50 rounded p-6 mb-6 mt-6 w-full flex flex-row justify-center">
-                    <input className="font-mont pl-10 pr-10 pt-5 pb-5" placeholder="Pesquisar"type="search" value={search} onChange={(e) => setSearch(e.target.value)}/>
+                    <input className="font-mont pl-10 pr-10 pt-5 pb-5" placeholder="Pesquisar advogado por nome"type="search" value={search} onChange={(e) => setSearch(e.target.value)}/>
                     <Select
                         isMulti
                         name="Área de atuação"
-                        
+                        options={optionsAdvs}
                         className="basic-multi-select"
                         classNamePrefix="select"
-  />
+                        />
+                    
                 </div>
             </div>
             <div className="flex flex-row flex-wrap justify-between gap-x-10">
