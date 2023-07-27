@@ -9,6 +9,7 @@ export default {
       },
       width: {
         '128': 'fit-content',
+        '9/2' : '48%',
       }
     },
     fontSize: {

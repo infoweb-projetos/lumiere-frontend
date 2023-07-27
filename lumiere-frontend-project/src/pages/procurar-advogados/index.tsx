@@ -13,6 +13,8 @@ interface PropsAdvs{
     areaDeAtuacao: null,
 }
 export default function ProcurarAdvogados () {
+    const [search, setSearch] = useState("");
+    
     const api = axios.create({
         baseURL: 'http://localhost:3000'
     })
@@ -21,25 +23,26 @@ export default function ProcurarAdvogados () {
     useEffect(() => {
     async function loadAdvs() {
       const response = await api.get('/advogado')
+      
 
       setAdvs(response.data)
 
     }
     loadAdvs()
   }, [])
+
+  const filtro = advs.filter((adv : PropsAdvs) => adv.nome.toLowerCase().includes(search.toLowerCase()));
     return(
     <>
         <main className=" pb-4 pl-16 pr-16 pt-24 bg-gray-200">
             <div className="flex flex-col items-center">
                 <div className="w-fit"><DisplayH1>Procurar advogados</DisplayH1></div>
-                <div className="border-2 border-gray-50 rounded p-6 mb-6 mt-6 w-full">Barra de pesquisa</div>
+                <div className="border-2 border-gray-50 rounded p-6 mb-6 mt-6 w-full flex flex-row justify-center">
+                    <input className="font-mont pl-10 pr-10 pt-5 pb-5" placeholder="Pesquisar"type="search" value={search} onChange={(e) => setSearch(e.target.value)}/>
+                </div>
             </div>
-            <div className="flex flex-row justify-between gap-x-10">
-                {/*
-                <CardProcurarAdvogados name="Michael S" description="Advogado muito top" rating="4" photourl='/michael-s.svg'/>
-                <CardProcurarAdvogados name="Michael S" description="Advogado muito top" rating="4" photourl='/michael-s.svg'/> */}
-                
-                {advs.map((adv : PropsAdvs) => (<CardProcurarAdvogados name={adv.nome} description="Advogado muito top" rating="4" photourl='/michael-s.svg'/>))}
+            <div className="flex flex-row flex-wrap justify-between gap-x-10">
+                {filtro.map((adv : PropsAdvs) => (<CardProcurarAdvogados name={adv.nome} description="Advogado muito top" rating="4" photourl='/michael-s.svg'/>))}
             </div>
         
         </main>

@@ -11,7 +11,8 @@ export const CardProcurarAdvogados = ({name, description, rating, photourl} :  I
     const onPointerMove = (value: number, index: number) => value=parseInt(rating);
 
     return(
-        <div className='bg-white flex flex-row w-2/4 rounded border-2 border-gray-200'>
+        <div className='bg-white flex flex-row w-9/2 rounded border-2 border-gray-200'>
+            
             <img className='object-cover'src={photourl}></img>
             <div className=' pl-8 h-80 flex flex-col justify-around'>
             <div className="flex flex-row w-full justify-between">
