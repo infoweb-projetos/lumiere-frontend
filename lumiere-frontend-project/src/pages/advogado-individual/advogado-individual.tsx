@@ -1,8 +1,13 @@
-import { useLocation } from "react-router-dom"
-export default function AdvogadoIndividual () {
+import { useLocation, useParams } from "react-router-dom"
+
+interface PropsAdv{
+    id : number | null,
+}
+export const AdvogadoIndividual = ({id} : PropsAdv) => {
+    console.log(id)
     return(
         <>
-        <h1>ola</h1>
+        <h1>{id}</h1>
         </>
     )
 }
