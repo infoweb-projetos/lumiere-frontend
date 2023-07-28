@@ -1,6 +1,6 @@
 export interface SignUpLawyer {
   email: string;
-  // password: string;
+  senha: string;
   // passwordConfirm: string;
   cnpj: string;
   historico: string | null;

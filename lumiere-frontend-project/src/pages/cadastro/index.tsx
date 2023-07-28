@@ -15,10 +15,13 @@ import { signUpLawyer } from '../../api/services/advogados';
 import { ApiError, SignUpLawyerResponse } from '../../api/services/advogados/singUpLawyer.interface';
 import { DisplayH1 } from '../../components/texts/display-sm/h1';
 import * as Switch from '@radix-ui/react-switch';
-
+import * as React from 'react';
+import * as Toast from '@radix-ui/react-toast';
 
 const Cadastro = () => {
   const [fase, setFase] = useState(1);
+  const [open, setOpen] = React.useState(false);
+  const timerRef = React.useRef(0);
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -48,6 +51,10 @@ const Cadastro = () => {
       console.log(data);
     },
     onError: (error: ApiError) => {
+      window.clearTimeout(timerRef.current);
+      timerRef.current = window.setTimeout(() => {
+        setOpen(true);
+      }, 100);
       setResponseError(error.response?.data.message || 'Um erro inesperado ocorreu.');
     },
   });
@@ -137,13 +144,14 @@ const Cadastro = () => {
         email: email,
         nome: name,
         cnpj: cnpjMask(cnpj),
-        historico: null,
+        senha: password,
+        historico: descricao ? descricao : null,
         areaDeAtuacao: null,
       });
     }
   }
 
-  function cnpjMask(value:string) {
+  function cnpjMask(value: string) {
     const onlyDigits = value.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
     const formattedCnpj = onlyDigits
       .slice(0, 14) // Limita o CNPJ a 14 dígitos
@@ -159,11 +167,6 @@ const Cadastro = () => {
       <div className="flex w-96 flex-col items-center justify-center gap-4 rounded border-2 border-gray-200 p-8 transition-all">
         <div className="w-full text-left">
           <DisplayH1>Cadastro</DisplayH1>
-          {responseError && (
-            <div className="rounded bg-semantic-red p-4 transition-all">
-              <MontInfo className="text-white">{responseError}</MontInfo>
-            </div>
-          )}
         </div>
 
         {fase === 1 && (
@@ -265,6 +268,22 @@ const Cadastro = () => {
           </form>
         )}
       </div>
+      {/* Toast Error */}
+      <Toast.Provider swipeDirection="right">
+        <Toast.Root
+          className="data-[state=open]:animate-slideIn data-[state=closed]:animate-hide data-[swipe=end]:animate-swipeOut flex flex-col gap-x-[15px] rounded-md bg-semantic-red p-[15px] font-mont shadow-black data-[swipe=cancel]:translate-x-0 data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[swipe=cancel]:transition-[transform_200ms_ease-out]"
+          open={open}
+          onOpenChange={setOpen}
+        >
+          <Toast.Title className="mb-[5px] font-mont text-[15px] font-bold text-gray-200 [grid-area:_title]">
+            Infelizmente ocorreu um erro.
+          </Toast.Title>
+          <Toast.Description asChild>
+            <MontInfo className="text-[12px] text-white/80">{responseError}</MontInfo>
+          </Toast.Description>
+        </Toast.Root>
+        <Toast.Viewport className="fixed bottom-0 right-0 z-[2147483647] m-0 flex w-[390px] max-w-[100vw] list-none flex-col gap-[10px] p-[var(--viewport-padding)] outline-none [--viewport-padding:_25px]" />
+      </Toast.Provider>
     </div>
   );
 };
