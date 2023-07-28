@@ -9,11 +9,10 @@ import "./index.css";
 function App() {
   return(
     <Routes>
-    <Route path="/" element={<HomePage/>} />
-    <Route path="/ProcurarAdvogados" element={<ProcurarAdvogados/>}/>
-    <Route path="/ProcurarAdvogados/:id" element={<Individual/>}/>
-
-  </Routes>
+      <Route path="/" element={<HomePage/>} />
+      <Route path="/ProcurarAdvogados" element={<ProcurarAdvogados/>}/>
+      <Route path="/ProcurarAdvogados/:id" element={<Individual/>}/>
+    </Routes>
   )
 }
 
