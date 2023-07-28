@@ -12,7 +12,7 @@ export const ButtonYellow = ({ size, title, type = 'button', func }: IButtonProp
     <>
       {size === 'sm' ? (
         <button
-          className=" flex h-11 items-center justify-center rounded bg-secondary-800 px-8 py-4 font-mont  text-sm font-semibold text-gray-200 shadow-black transition-all hover:bg-yellow-500 active:bg-secondary-500"
+          className=" w-fit flex h-11 items-center justify-center rounded bg-secondary-800 px-8 py-4 font-mont  text-sm font-semibold text-gray-200 shadow-black transition-all hover:bg-yellow-500 active:bg-secondary-500"
           type={type}
           onClick={handClick}
         >
@@ -20,7 +20,7 @@ export const ButtonYellow = ({ size, title, type = 'button', func }: IButtonProp
         </button>
       ) : size === 'xl' ? (
         <button
-          className="rounded bg-secondary-800 px-8 py-4 font-mont text-xl font-semibold text-gray-200 shadow-black transition-all hover:bg-yellow-500 active:bg-secondary-500"
+          className=" w-fit rounded bg-secondary-800 px-8 py-4 font-mont text-xl font-semibold text-gray-200 shadow-black transition-all hover:bg-yellow-500 active:bg-secondary-500"
           type={type}
           onClick={handClick}
         >

@@ -24,7 +24,7 @@ export const MenuLogin = () => {
         activeBorder ? 'border-gray-300' : ''
       } bg-gray-200 pb-4 pl-16 pr-16 pt-4 transition-all`}
     >
-      <a href="google.com" className="flex items-center">
+      <a href="/" className="flex items-center">
         <img className="hidden lg:block" src="/logo-blue-text.svg" alt="" />
         <img className="lg:hidden" src="/logo-blue-al.svg" alt="" />
       </a>
@@ -35,7 +35,7 @@ export const MenuLogin = () => {
         </li>
         <li>
           {' '}
-          <LinkUnderline text="Encontrar Advogados" href="/Casos" />
+          <LinkUnderline text="Encontrar Advogados" href="/ProcurarAdvogados" />
         </li>
 
         <li>

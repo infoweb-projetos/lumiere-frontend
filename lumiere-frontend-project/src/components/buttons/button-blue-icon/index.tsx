@@ -1,5 +1,5 @@
 import { IButtonProps } from '../button.interface';
-export const Button_blue = ({ size, title, type = 'button', func }: IButtonProps) => {
+export const Button_blue = ({ size, title, type = 'button', func, className }: IButtonProps) => {
   const handClick = () => {
     if (func) {
       func();
@@ -10,7 +10,9 @@ export const Button_blue = ({ size, title, type = 'button', func }: IButtonProps
     <>
       {size === 'sm' ? (
         <button
-          className="flex h-11 items-center justify-center rounded bg-primary-500 px-8 font-mont text-sm font-semibold text-gray-200 shadow-black transition-all hover:bg-blue-800 active:bg-primary-500"
+          className={`flex h-11 items-center justify-center rounded bg-primary-500 px-8 font-mont text-sm font-semibold text-gray-200 shadow-black transition-all hover:bg-blue-800 active:bg-primary-500 ${
+            className ? className : ''
+          }`}
           type={type}
           onClick={handClick}
         >

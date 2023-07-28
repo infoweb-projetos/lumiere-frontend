@@ -5,7 +5,11 @@ export default {
     extend: {
       boxShadow: {
         white: '0px 5px 15px -3px rgba(232, 233, 237, 0.05)', // shadow-white
-        black: '0px 5px 15px -3px rgba(0, 0, 0, 0.05)', // shadow-black
+        black: '0px 5px 15px -3px rgba(0, 0, 0, 0.02)', // shadow-black
+      },
+      width: {
+        128: 'fit-content',
+        '9/2': '48%',
       },
     },
     fontSize: {
@@ -18,6 +22,9 @@ export default {
       '5xl': '3.5rem', // font-5xl (tittle-dm-display)
     },
     colors: {
+      white: '#FFFFFF',
+      black: '#000000',
+
       primary: {
         800: '#0D1D37', // primary-500
         500: '#1D3F7E', // primary-800
@@ -28,14 +35,14 @@ export default {
       },
       gray: {
         800: '#252932', // gray-800
-        600: '#4B4E57', // gray -600
+        600: '#4B4E57', // gray-600
+        550: '#9498A1', //gray-550
         500: '#BDBDBD', // gray-500
         400: '#9498A1', // gray-400
         300: '#C0C0C0', // gray-300
-
         200: '#E8E9ED', // gray-200
-
         100: '#393E49',
+        50: '#CBC4C4',
       },
       semantic: {
         red: '#C95336', // semantic-red
@@ -44,10 +51,12 @@ export default {
       },
       yellow: {
         500: '#C19851', //yellow-500
+        800: '#A88446',
       },
       blue: {
         800: '#2F5CAF', //blue-500
         600: '#2B364F',
+        300: '#0D1D37',
       },
     },
     fontFamily: {
