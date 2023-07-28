@@ -18,6 +18,8 @@ export default {
       '5xl': '3.5rem', // font-5xl (tittle-dm-display)
     },
     colors: {
+      "white" : "#FFFFFF",
+      "black" : "#000000",
       primary: {
         800: '#0D1D37', // primary-500
         500: '#1D3F7E', // primary-800
