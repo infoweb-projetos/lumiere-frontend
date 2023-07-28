@@ -18,6 +18,7 @@ export default {
       '5xl': '3.5rem', // font-5xl (tittle-dm-display)
     },
     colors: {
+      white: '#fff',
       primary: {
         800: '#0D1D37', // primary-500
         500: '#1D3F7E', // primary-800
@@ -28,13 +29,12 @@ export default {
       },
       gray: {
         800: '#252932', // gray-800
-        600: '#4B4E57', // gray -600
+        600: '#4B4E57', // gray-600
+        550: '#9498A1', //gray-550
         500: '#BDBDBD', // gray-500
         400: '#9498A1', // gray-400
         300: '#C0C0C0', // gray-300
-
         200: '#E8E9ED', // gray-200
-
         100: '#393E49',
       },
       semantic: {
