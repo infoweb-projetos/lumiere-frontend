@@ -35,7 +35,7 @@ export const MenuLogin = () => {
         </li>
         <li>
           {' '}
-          <LinkUnderline text="Encontrar Advogados" href="/ProcurarAdvogados" />
+          <LinkUnderline text="Encontrar Advogados" href="/Casos" />
         </li>
 
         <li>

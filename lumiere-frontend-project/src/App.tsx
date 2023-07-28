@@ -1,19 +1,36 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
-import ProcurarAdvogados from '../src/pages/procurar-advogados/';
-import Individual from '../src/components/cards/individual/';
-import HomePage from '../src/pages/homepage/';
-import "./index.css";
+import { MenuLogin } from './components/menu/menu-login';
+import { MenuNoLogin } from './components/menu/menu-no-login';
+import { DisplayTitulo } from './components/texts/display-sm/titulo';
+import { MontH1 } from './components/texts/monteserrat/h1';
+import { MontP } from './components/texts/monteserrat/p';
 
 function App() {
-  return(
-    <Routes>
-      <Route path="/" element={<HomePage/>} />
-      <Route path="/ProcurarAdvogados" element={<ProcurarAdvogados/>}/>
-      <Route path="/ProcurarAdvogados/:id" element={<Individual/>}/>
-    </Routes>
-  )
+  const a = false;
+  return (
+    <>
+      {a ? <MenuNoLogin /> : <MenuLogin />}
+
+      {/*  */}
+      <div className="mt-16 flex h-[1000px] flex-col content-center items-center bg-gray-200 p-8 text-3xl font-bold">
+        <div className="space-y-8">
+          <DisplayTitulo>Melhores Advogados</DisplayTitulo>
+          <MontH1>Advogados</MontH1>
+          <MontP>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi possimus dolor dolorem corporis officiis
+            voluptas saepe odio placeat aliquam, iusto fugit ut, in doloremque dolorum recusandae eaque provident iste
+            a.
+          </MontP>
+          <MontP className=" text-right text-semantic-red">Erro no console</MontP>
+          <MontH1>Lawyers</MontH1>
+          <MontP>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi possimus dolor dolorem corporis officiis
+            voluptas saepe odio placeat aliquam, iusto fugit ut, in doloremque dolorum recusandae eaque provident iste
+            a.
+          </MontP>
+        </div>
+      </div>
+    </>
+  );
 }
 
 export default App;
