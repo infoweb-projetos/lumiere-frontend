@@ -1,17 +1,19 @@
-import { MenuLogin } from './components/menu/menu-login';
-import { MenuNoLogin } from './components/menu/menu-no-login';
-
-
+import React from "react";
+import ReactDOM from "react-dom/client";
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import ProcurarAdvogados from '../src/pages/procurar-advogados/';
+import AdvogadoIndividual from '../src/pages/procurar-advogados/';
+import HomePage from '../src/pages/homepage/';
+import "./index.css";
 
 function App() {
-  const a = false;
-  return (
-    <>
-
-      {a ? <MenuNoLogin /> : <MenuLogin />}
-
-      {/*  */}
-    </>
+  return(
+    <Routes>
+    <Route path="/" element={<HomePage/>} />
+    <Route path="/ProcurarAdvogados" element={<ProcurarAdvogados/>}>
+    <Route path="AdvogadoIndividual/:id"element={<AdvogadoIndividual/>}/>
+    </Route>
+  </Routes>
   )
 }
 

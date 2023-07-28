@@ -23,6 +23,7 @@ export default {
     },
     colors: {
       "white" : "#FFFFFF",
+      "black" : "#000000",
       primary: {
         800: '#0D1D37', // primary-500
         500: '#1D3F7E', // primary-800
@@ -50,10 +51,12 @@ export default {
       },
       yellow: {
         500: '#C19851', //yellow-500
+        800: '#A88446',
       },
       blue: {
         800: '#2F5CAF', //blue-500
         600: '#2B364F',
+        300: '#0D1D37',
       },
     },
     fontFamily: {

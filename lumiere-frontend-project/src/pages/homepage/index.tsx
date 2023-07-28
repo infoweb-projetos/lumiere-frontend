@@ -1,31 +1,79 @@
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 import { DisplayTitulo } from '../../components/texts/display-sm/titulo';
 import { MontH1 } from '../../components/texts/monteserrat/h1';
 import { MontP } from '../../components/texts/monteserrat/p';
+import { DisplayH1 } from '../../components/texts/display-sm/h1';
 import {CardAmarelo} from '../../components/cards/card-menu-amarelo';
+import { CardMenuBottom } from '../../components/cards/card-menu-foto-bottom';
+import { MenuLogin } from '../../components/menu/menu-login';
+import { MenuNoLogin } from '../../components/menu/menu-no-login';
+import { Button_ghost_dark } from '../../components/buttons/button-ghost-dark';
+import { Footer } from '../../components/footer';
 
 export default function HomePage () {
+  interface PropsAdvs{
+    id: number,
+    nome: string,
+    email: string,
+    cnpj: string,
+    historico: string,
+    areaDeAtuacao: string,
+}
+  const a = true;
+  const api = axios.create({
+        baseURL: 'http://localhost:3000'
+    })
+    const [advs, setAdvs] = useState([])
 
+    useEffect(() => {
+      async function loadAdvs() {
+        const response = await api.get('/advogado')
+  
+        setAdvs(response.data)
+  
+      }
+      loadAdvs()
+    }, [])
     return(
     <>
-      <div className="mt-16 flex h-[1000px] flex-col content-center items-center bg-gray-200 p-8 text-3xl font-bold">
-        <div className="space-y-8">
-          <DisplayTitulo>Melhores Advogados</DisplayTitulo>
-          <CardAmarelo name='Pedro Gustavo' description='Adoro me concentrar em casos complicados! estou aqui para te ajudar e dar fim ao seu caso.' rating="3" photourl="/card-1.svg" ></CardAmarelo>
-          <MontH1>Advogados</MontH1>
-          <MontP>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi possimus dolor dolorem corporis officiis
-            voluptas saepe odio placeat aliquam, iusto fugit ut, in doloremque dolorum recusandae eaque provident iste
-            a.
-          </MontP>
-          <MontP className=" text-right text-semantic-red">Erro no console</MontP>
-          <MontH1>Lawyers</MontH1>
-          <MontP>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi possimus dolor dolorem corporis officiis
-            voluptas saepe odio placeat aliquam, iusto fugit ut, in doloremque dolorum recusandae eaque provident iste
-            a.
-          </MontP>
+      {a ? <MenuNoLogin /> : <MenuLogin />}
+      <main className=" pb-4  pt-24 bg-gray-200">
+        <div className="flex flex-row justify-between p-20">
+          <div className="p-10 flex flex-col justify-center ">
+            <DisplayH1 className='text-yellow-800 text-7xl'>FACILITE SEU CONTATO COM</DisplayH1>
+            <DisplayH1 className='text-blue-300'>ADVOGADOS</DisplayH1>
+
+            <MontP className="pt-8 pb-8">Crie uma conta na advocacia lumiere e tenha acesso a diversos mecanismos para auxiliar no seu caso!</MontP>
+            <Button_ghost_dark size="sm" title="CRIAR CONTA ->" type="submit"  />
+          </div>
+          <div>
+            <img src="/banner.svg"></img>
+          </div>
         </div>
-      </div>
+        <div className="p-28 flex flex-col items-center bg-secondary-500 ">
+          <DisplayH1>Veja nossos principais advogados</DisplayH1>
+          <div className="flex flex-wrap justify-between pt-10 gap-x-20">
+          {advs.map((adv : PropsAdvs) => (<CardAmarelo name={adv.nome} description="Advogado muito top" rating="4" photourl='/michael-s.svg'/>))}
+          </div>  
+        </div>
+
+        <div className="p-28 flex flex-col items-center ">
+          <DisplayH1>O melhor ambiente para encontrar um advogado</DisplayH1>
+          <div className="flex flex-wrap justify-between pt-10 gap-x-20">
+          {advs.map((adv : PropsAdvs) => (<CardMenuBottom name={adv.nome} description="Advogado muito top" rating="4" photourl='/michael-s.svg'/>))}
+          </div>  
+        </div> 
+
+        <div className="flex flex-row justify-around items-center p-28">
+          <div>
+            <DisplayH1 className='text-yellow-800 '>ENCONTRE</DisplayH1>
+            <DisplayH1 className='text-blue-300'>ADVOGADOS</DisplayH1>
+          </div>
+          <Button_ghost_dark size="sm" title="CRIAR CONTA ->" type="submit"  />
+        </div>
+        <Footer />
+      </main>
     </>
   );
 }

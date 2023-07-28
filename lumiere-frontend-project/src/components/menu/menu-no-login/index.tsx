@@ -40,7 +40,7 @@ export const MenuNoLogin = () => {
       <ul className="flex items-center gap-8 font-mont text-base text-gray-800">
         <li>
           {' '}
-          <LinkUnderline text="Encontrar Advogados" href="/Casos" />
+          <LinkUnderline text="Encontrar Advogados" href="/ProcurarAdvogados" />
         </li>
 
         <li>

@@ -10,14 +10,7 @@ import "./index.css";
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<HomePage/>} />
-        <Route path="/ProcurarAdvogados" element={<ProcurarAdvogados/>}>
-          <Route path="/ProcurarAdvogados/:id"element={<AdvogadoIndividual/>}/>
-        </Route>
-      </Routes>
+      <App />
     </BrowserRouter>
-    
-    <App />
   </React.StrictMode>,
 );
