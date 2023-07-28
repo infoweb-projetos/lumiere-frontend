@@ -21,7 +21,7 @@ export const CardMenuBottom = ({name, description, rating, photourl} :  ICardPro
                 <MontH1>{name}</MontH1>
                 <MontP className="pb-10">{description}</MontP>
             </div>
-            <img className='h-3/4 object-cover' src={photourl}></img>
+            <img className='h-3/5 object-cover' src={photourl}></img>
             </div>
         </div>
     )
