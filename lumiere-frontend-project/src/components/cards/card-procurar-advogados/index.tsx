@@ -7,9 +7,13 @@ import { ButtonYellow } from '../../buttons/button-yellow-icon/index.tsx';
 import { Button_ghost_dark } from '../../buttons/button-ghost-dark/index.tsx';
 
 
-export const CardProcurarAdvogados = ({name, description, rating, photourl} :  ICardProps) =>{
+export const CardProcurarAdvogados = ({name, description, rating, photourl, referencia} :  ICardProps) =>{
     const onPointerMove = (value: number, index: number) => value=parseInt(rating);
-
+    const function_redirect = () => {
+        return(
+            "window.location.href = 'http://pt.stackoverflow.com"
+        )
+    }
     return(
         <div className='bg-white flex flex-row w-9/2 rounded border-2 border-gray-200 pr-10 '>
             
@@ -22,7 +26,7 @@ export const CardProcurarAdvogados = ({name, description, rating, photourl} :  I
                 </div>
             
             <MontP>{description}</MontP>
-            <div className='h-20 flex items-center'><Button_ghost_dark title="Contactar" size="sm"></Button_ghost_dark></div>
+            <div className='h-20 flex items-center'><Button_ghost_dark title="Contactar" size="sm" referencia={referencia}></Button_ghost_dark></div>
             </div>
         </div>
     )
