@@ -11,15 +11,15 @@ export const CardPageAdvogadoIndividual = ({ name, description, rating, photourl
     const onPointerMove = (value: number, index: number) => value=parseInt(rating);
 
     return(
-        <div className='bg-blue-300 flex flex-row pb-4 pt-28 w-full pr-20'>
-            <div className='flex flex-col w-2/6 items-center'>
+        <div className='bg-blue-300 flex flex-row pb-4 pt-28 w-full pl-20 pr-20'>
+            <div className='flex flex-col w-1/4 items-center'>
                 <div className='flex flex-row justify-center '>
                     <MontH1 className="text-white text-[24px] mr-4">{name}</MontH1>
                     <Rating onClick={onPointerMove} size={35} disableFillHover={true} allowHover={false} fillColor="#D1BC87" SVGstyle={{'display':'inline'}}initialValue={parseInt(rating)}/>
                 </div>
                 <img className='-rotate-90 w-96'src={photourl}></img>
             </div>
-            <div className="flex flex-col w-1/6 items-center mr-10">
+            <div className="flex flex-col w-1/4 items-center mr-10">
                 <div>
                     <div className="pb-8">
                         <MontH1 className="text-white pb-2">Casos vencidos</MontH1>
