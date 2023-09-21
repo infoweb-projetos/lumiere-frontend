@@ -11,10 +11,10 @@ import { CardPageAdvogadoIndividual} from '../../components/cards/card-page-advo
 import { Comentario} from '../../components/cards/comentario'
 
 interface PropsAdv{
-    id : number | null,
+    id : string | null,
 }
 interface PropsAdvsList {
-    id: number;
+    id: string | null;
     nome: string;
     email: string;
     cnpj: string;
@@ -42,11 +42,11 @@ export const AdvogadoIndividual = ({id} : PropsAdv) => {
         <>
         {a ? <MenuNoLogin /> : <MenuLogin />}
             <div className="flex flex-row">
-                {advs.map((adv : PropsAdvsList, index: Number) => 
+                {advs.map((adv : PropsAdvsList) => 
                 {
                     
                     console.log(adv.id)
-                    if(id == index){
+                    if(id == adv.id){
                         return(
 
                             <CardPageAdvogadoIndividual 

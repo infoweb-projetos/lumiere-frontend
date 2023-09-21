@@ -10,6 +10,8 @@ import { Footer } from '../../components/footer';
 import { CardPageAdvogadoIndividual} from '../../components/cards/card-page-advogado-individual'
 import { Comentario} from '../../components/cards/comentario'
 import { DisplaySubTitulo } from '../../components/texts/display-sm/subtitulo';
+import axiosInstance from '../../api/axiosinstance';
+import { LinhaCaso } from '../../components/cards/card-listar-casos';
 
 interface PropsAdv{
     id : string | null,
@@ -21,7 +23,7 @@ interface PropsList {
     createAt: string
 
   } 
-export const CasoAdvogado = ({id} : PropsAdv) => {
+export const CasoAdvogado = () => {
     const a = false; 
     const api = axios.create({
         baseURL: 'https://lumiere-api.vercel.app'
@@ -30,13 +32,13 @@ export const CasoAdvogado = ({id} : PropsAdv) => {
 
     useEffect(() => {
       async function loadCases() {
-        const response = await api.get('/caso');
+        const response = await axiosInstance.get('/caso');
   
         setCases(response.data);
       }
       loadCases();
     }, []);
-    const filtro = cases.filter((c:PropsList) => c.advogadoId == id);
+    //const filtro = cases.filter((c:PropsList) => c.advogadoId == id);
 
     return(
         <>
@@ -57,9 +59,9 @@ export const CasoAdvogado = ({id} : PropsAdv) => {
 
             </table>
             <div>
-            {filtro.map((c:PropsList) =>
+            {cases.map((c:PropsList) =>
                  
-                    <h1>{id}</h1>
+                    <LinhaCaso id={c.id} titulo={c.descricao} createdAt={c.createAt} advogadoId={c.advogadoId}></LinhaCaso>
             )}
             </div>
         </main>

@@ -7,7 +7,7 @@ export default function Individual () {
     const {id} = useParams();
     return(
     <>
-        <AdvogadoIndividual id={id? Number.parseInt(id) : null}/>    
+        <AdvogadoIndividual id={id? id.toString() : null}/>    
     </>
     )
 }

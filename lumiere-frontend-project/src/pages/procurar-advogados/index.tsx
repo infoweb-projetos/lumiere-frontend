@@ -8,6 +8,7 @@ import { MenuNoLogin } from '../../components/menu/menu-no-login';
 import { Footer } from '../../components/footer';
 
 import { CardProcurarAdvogados } from '../../components/cards/card-procurar-advogados';
+import axiosInstance from '../../api/axiosinstance';
 const a = true;
 
 interface PropsAdvs{
@@ -35,7 +36,7 @@ export default function ProcurarAdvogados () {
     const [advs, setAdvs] = useState([])
     useEffect(() => {
     async function loadAdvs() {
-      const response = await api.get('/advogado')
+      const response = await axiosInstance.get('/advogado')
       
 
       setAdvs(response.data)
@@ -57,7 +58,7 @@ export default function ProcurarAdvogados () {
     return(
     <>
         {a ? <MenuNoLogin /> : <MenuLogin />}
-        <main className=" pb-4 pl-16 pr-16 pt-24 bg-gray-200">
+        <main className=" pb-4 pl-16 pr-16 pt-24 bg-gray-200 min-h-screen">
             <div className="flex flex-col items-center">
                 <div className="w-fit"><DisplayH1>Procurar advogados</DisplayH1></div>
                 <div className="border-2 border-gray-50 rounded p-6 mb-6 mt-6 w-full flex flex-row justify-center">
