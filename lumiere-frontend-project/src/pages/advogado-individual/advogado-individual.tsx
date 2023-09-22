@@ -14,7 +14,7 @@ interface PropsAdv{
     id : string | null,
 }
 interface PropsAdvsList {
-    id: string | null;
+    id: string;
     nome: string;
     email: string;
     cnpj: string;
@@ -24,7 +24,7 @@ interface PropsAdvsList {
 export const AdvogadoIndividual = ({id} : PropsAdv) => {
     const a = true; 
     const api = axios.create({
-        baseURL: 'http://localhost:3000'
+        baseURL: 'https://lumiere-api.vercel.app'
     })
     const [advs, setAdvs] = useState([]);
 
@@ -41,6 +41,8 @@ export const AdvogadoIndividual = ({id} : PropsAdv) => {
     return(
         <>
         {a ? <MenuNoLogin /> : <MenuLogin />}
+            <main className="min-h-screen bg-gray-200">
+
             <div className="flex flex-row">
                 {advs.map((adv : PropsAdvsList) => 
                 {
@@ -76,6 +78,7 @@ export const AdvogadoIndividual = ({id} : PropsAdv) => {
                 </div>
             </div>
             <Footer/>
+            </main>
         </>
     )
 }

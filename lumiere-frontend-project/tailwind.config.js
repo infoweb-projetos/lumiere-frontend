@@ -52,6 +52,7 @@ export default {
       yellow: {
         500: '#C19851', //yellow-500
         800: '#A88446',
+        100: '#785F34',
       },
       blue: {
         800: '#2F5CAF', //blue-500

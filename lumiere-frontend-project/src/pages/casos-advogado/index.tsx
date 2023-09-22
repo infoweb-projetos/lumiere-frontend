@@ -32,7 +32,7 @@ export const CasoAdvogado = () => {
 
     useEffect(() => {
       async function loadCases() {
-        const response = await axiosInstance.get('/caso');
+        const response = await axiosInstance.get('/casos/me');
   
         setCases(response.data);
       }
@@ -43,27 +43,45 @@ export const CasoAdvogado = () => {
     return(
         <>
         {a ? <MenuNoLogin /> : <MenuLogin />}
-        <main className="pt-24 bg-gray-200 pl-16 pr-16">
-            <DisplayH1 className="text-black text-[40px]">Casos em andamento</DisplayH1>
-            <table className='table-auto'>
-                <thead>
-                    <tr className='bg-primary-500 font-mont text-white text-[30px] rounded-sm '>
-                        <th className=''></th>
-                        <th className=''>Caso</th>
-                        <th className=''>Descrição breve</th>
-                        <th className=''>Nome do cliente</th>
-                        <th className=''>Data de abertura</th>
-                    </tr>
-                </thead>
-
-
-            </table>
-            <div>
-            {cases.map((c:PropsList) =>
-                 
-                    <LinhaCaso id={c.id} titulo={c.descricao} createdAt={c.createAt} advogadoId={c.advogadoId}></LinhaCaso>
-            )}
+        <main className="pt-24 bg-gray-200 pl-16 pr-16 min-h-screen">
+            <div className="flex flex-row justify-between mt-8 mb-4">
+                <DisplayH1 className="text-black text-[42px]">Casos em andamento</DisplayH1>
+                <div className="font-mont">
+                    <button className="bg-gray-50 mr-4 p-4 rounded-sm">Adicionar caso</button>
+                    <button className="bg-gray-50 p-4 rounded-sm">Excluir caso</button>
+                </div>
             </div>
+            <div className="bg-primary-500 font-mont text-white text-[30px] rounded-sm grid grid-cols-5 font-bold p-5">
+                    <h1></h1>
+                    <h1>Caso</h1>
+                    <h1>Descrição breve</h1>
+                    <h1>Nome do cliente</h1>
+                    <h1>Data de abertura</h1>
+                </div>
+            {cases.map((c:PropsList) =>
+                <div className="grid grid-cols-5 bg-white pl-4 pr-4 pt-8 pb-8">
+                    <LinhaCaso id={c.id} titulo={c.descricao} createdAt={c.createAt} advogadoId={c.advogadoId}></LinhaCaso>
+                </div>
+         )}                
+            <div className="flex flex-row justify-between mt-8 mb-4">
+                            <DisplayH1 className="text-black text-[42px]">Casos concluídos</DisplayH1>
+                            <div className="font-mont">
+                                <button className="bg-gray-50 p-4 rounded-sm">Excluir caso</button>
+                            </div>
+                        </div>
+                        <div className="bg-primary-500 font-mont text-white text-[30px] rounded-sm grid grid-cols-5 font-bold p-5">
+                                <h1></h1>
+                                <h1>Caso</h1>
+                                <h1>Descrição breve</h1>
+                                <h1>Nome do cliente</h1>
+                                <h1>Data de abertura</h1>
+                            </div>
+                        {cases.map((c:PropsList) =>
+                            <div className="grid grid-cols-5 bg-white pl-4 pr-4 pt-8 pb-8">
+                                <LinhaCaso id={c.id} titulo={c.descricao} createdAt={c.createAt} advogadoId={c.advogadoId}></LinhaCaso>
+                            </div>
+                    )}                
+            <Footer />
         </main>
    
         </>
