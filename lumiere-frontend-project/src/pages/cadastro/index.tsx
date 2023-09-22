@@ -168,6 +168,7 @@ const Cadastro = () => {
         </div>
 
         {fase === 1 && (
+          // eslint-disable-next-line @typescript-eslint/no-misused-promises
           <form className="flex flex-col gap-6" onSubmit={choise ? onSubmitFirst : onSubmitClient}>
             <div className="flex w-full flex-col">
               <Label forLabel="name">Name</Label>
@@ -235,6 +236,7 @@ const Cadastro = () => {
           </form>
         )}
         {fase === 2 && choise && (
+          // eslint-disable-next-line @typescript-eslint/no-misused-promises
           <form className="flex w-full flex-col gap-4" onSubmit={onSubmitSecond}>
             <button
               onClick={() => {
