@@ -14,9 +14,9 @@ interface ILinha {
 export const LinhaCaso = ({titulo, createdAt, id, advogadoId} :  ILinha) =>{
     return(
         <>
-            <input type="checkbox" className="accent-secondary-500"/>
+            <input type="checkbox" className="accent-secondary-500 max-h-10"/>
             <h1 className=" bg-secondary-500 font-mont rounded-sm p-2 w-fit text-yellow-100">{titulo}</h1>        
-        
+            <h1 className=" font-mont ">{createdAt.toLocaleString()}</h1>  
         </>
     )
 }

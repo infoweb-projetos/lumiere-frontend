@@ -20,7 +20,7 @@ interface PropsList {
     id: string;
     descricao: string;
     advogadoId: string;
-    createAt: string
+    createdAt: string
 
   } 
 export const CasoAdvogado = () => {
@@ -38,8 +38,7 @@ export const CasoAdvogado = () => {
       }
       loadCases();
     }, []);
-    //const filtro = cases.filter((c:PropsList) => c.advogadoId == id);
-
+    console.log(cases)
     return(
         <>
         {a ? <MenuNoLogin /> : <MenuLogin />}
@@ -59,8 +58,8 @@ export const CasoAdvogado = () => {
                     <h1>Data de abertura</h1>
                 </div>
             {cases.map((c:PropsList) =>
-                <div className="grid grid-cols-5 bg-white pl-4 pr-4 pt-8 pb-8">
-                    <LinhaCaso id={c.id} titulo={c.descricao} createdAt={c.createAt} advogadoId={c.advogadoId}></LinhaCaso>
+                <div key={c.id} className="grid grid-cols-5 bg-white pl-4 pr-4 pt-8 pb-8">
+                    <LinhaCaso  id={c.id} titulo={c.descricao} createdAt={c.createdAt} advogadoId={c.advogadoId}></LinhaCaso>
                 </div>
          )}                
             <div className="flex flex-row justify-between mt-8 mb-4">
@@ -77,8 +76,8 @@ export const CasoAdvogado = () => {
                                 <h1>Data de abertura</h1>
                             </div>
                         {cases.map((c:PropsList) =>
-                            <div className="grid grid-cols-5 bg-white pl-4 pr-4 pt-8 pb-8">
-                                <LinhaCaso id={c.id} titulo={c.descricao} createdAt={c.createAt} advogadoId={c.advogadoId}></LinhaCaso>
+                            <div key={c.id} className="grid grid-cols-5 bg-white pt-8 pb-8 gap-x-2">
+                                <LinhaCaso  id={c.id} titulo={c.descricao} createdAt={c.createdAt} advogadoId={c.advogadoId}></LinhaCaso>
                             </div>
                     )}                
             <Footer />

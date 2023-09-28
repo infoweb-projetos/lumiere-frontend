@@ -11,15 +11,15 @@ import { CardPageAdvogadoIndividual} from '../../components/cards/card-page-advo
 import { Comentario} from '../../components/cards/comentario'
 
 interface PropsAdv{
-    id : string | null,
+    id : string,
 }
 interface PropsAdvsList {
     id: string;
     nome: string;
     email: string;
     cnpj: string;
-    historico: string;
-    areaDeAtuacao: string;
+    historico: string  | null;
+    areaDeAtuacao: string | null;
   } 
 export const AdvogadoIndividual = ({id} : PropsAdv) => {
     const a = true; 
@@ -37,7 +37,7 @@ export const AdvogadoIndividual = ({id} : PropsAdv) => {
       loadAdvs();
     }, []);
 
-    console.log(id)
+    
     return(
         <>
         {a ? <MenuNoLogin /> : <MenuLogin />}
@@ -47,7 +47,7 @@ export const AdvogadoIndividual = ({id} : PropsAdv) => {
                 {advs.map((adv : PropsAdvsList) => 
                 {
                     
-                    console.log(adv.id)
+                    console.log(adv)
                     if(id == adv.id){
                         return(
 

@@ -12,7 +12,7 @@ import axiosInstance from '../../api/axiosinstance';
 const a = true;
 
 interface PropsAdvs{
-    id: number,
+    id: string,
     nome: string,
     email: string,
     cnpj: string,
