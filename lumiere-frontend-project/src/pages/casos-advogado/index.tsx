@@ -46,7 +46,7 @@ export const CasoAdvogado = () => {
             <div className="flex flex-row justify-between mt-8 mb-4">
                 <DisplayH1 className="text-black text-[42px]">Casos em andamento</DisplayH1>
                 <div className="font-mont">
-                    <button className="bg-gray-50 mr-4 p-4 rounded-sm">Adicionar caso</button>
+                    <button ref="/CriarCaso" className="bg-gray-50 mr-4 p-4 rounded-sm">Adicionar caso</button>
                     <button className="bg-gray-50 p-4 rounded-sm">Excluir caso</button>
                 </div>
             </div>
