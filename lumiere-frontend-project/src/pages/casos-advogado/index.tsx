@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import Select, { MultiValue } from "react-select";
 import { MontH1 } from '../../components/texts/monteserrat/h1';
 import { MontH2 } from '../../components/texts/monteserrat/h2';
@@ -23,7 +23,7 @@ interface PropsList {
     createdAt: string
 
   } 
-export const CasoAdvogado = () => {
+export default function CasoAdvogado () {
     const a = false; 
     const api = axios.create({
         baseURL: 'https://lumiere-api.vercel.app'

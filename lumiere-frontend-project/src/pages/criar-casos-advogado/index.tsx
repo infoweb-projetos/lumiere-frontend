@@ -8,14 +8,17 @@ import { ErrorsForm} from './caso.interface';
 import { useMutation } from 'react-query';
 import {createCaseSchema} from './caso.validation'
 import { ApiError, CreateCaseResponse } from '../../api/services/casos/criarCaso.interface';
-import { createCase } from '../../api/services/casos'
+import { createCase } from '../../api/services/casos';
+import { MenuLogin } from '../../components/menu/menu-login';
+import { MenuNoLogin } from '../../components/menu/menu-no-login';
 
-const CriarCaso = () => {
+export default function CriarCaso () {
     const [titulo, setTitulo] = useState('');
     const [descricao, setDescricao] = useState('');
     const [nomeCliente, setnomeCliente] = useState('');
     const timerRef = React.useRef(0);
     const [open, setOpen] = React.useState(false);
+    const a = false;
 
     const [responseError, setResponseError] = useState('');
     const [validationFormError, setValidationFormError] = useState<ErrorsForm>({
@@ -41,8 +44,8 @@ const CriarCaso = () => {
         try {
           await createCaseSchema.validate(
             {
-              titulo: titulo,
-              descricao: descricao,
+              titulo,
+              descricao,
               nomecliente: nomeCliente,
             },
             {
@@ -76,5 +79,17 @@ const CriarCaso = () => {
           });
         }
       }
+      return(
+        <>
+          {a ? <MenuNoLogin /> : <MenuLogin />}
+          <main className="pt-24 bg-gray-200 pl-16 pr-16 min-h-screen">
+            
+            
+          </main>        
+        
+        
+        </>
+
+        )
 
 }
