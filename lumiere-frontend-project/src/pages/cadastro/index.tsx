@@ -81,7 +81,7 @@ const Cadastro = () => {
         }, {});
         setValidationFormError(validationErrors);
       }
-      return false;
+      return false; 
     }
     setValidationFormError({});
     return true;

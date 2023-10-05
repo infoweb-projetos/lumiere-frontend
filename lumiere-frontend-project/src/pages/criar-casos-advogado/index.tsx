@@ -5,16 +5,15 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { useState } from 'react';
 import * as Yup from 'yup';
 import { ErrorsForm} from './caso.interface';
-import { CreateCase } from '../../api/services/advogados';
 import { useMutation } from 'react-query';
-import { CreateCaseResponse } from '../../api/services/advogados/createCase.interface';
 import {createCaseSchema} from './caso.validation'
-import { ApiError } from '../../api/services/advogados/singUpLawyer.interface';
+import { ApiError, CreateCaseResponse } from '../../api/services/casos/criarCaso.interface';
+import { createCase } from '../../api/services/casos'
 
 const CriarCaso = () => {
-    const [titulo, setTitulo] = useState();
-    const [descricao, setDescricao] = useState();
-    const [nomeCliente, setnomeCliente] = useState();
+    const [titulo, setTitulo] = useState('');
+    const [descricao, setDescricao] = useState('');
+    const [nomeCliente, setnomeCliente] = useState('');
     const timerRef = React.useRef(0);
     const [open, setOpen] = React.useState(false);
 
@@ -23,10 +22,9 @@ const CriarCaso = () => {
       titulo: '',
       descricao: '',
       nomecliente: '',
-      createdAt: '',
     });
 
-    const creatCaseMutation = useMutation(CreateCase, {
+    const createCaseMutation = useMutation(createCase, {
         onSuccess: (data: CreateCaseResponse) => {
           console.log(data);
         },
@@ -64,5 +62,19 @@ const CriarCaso = () => {
         setValidationFormError({});
         return true;
       };
+      async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+    
+        const isValid = await validateForm();
+    
+        if (isValid) {
+          console.log(descricao);
+          createCaseMutation.mutate({
+            titulo: titulo,
+            descricao: descricao,
+            nomecliente: nomeCliente,
+          });
+        }
+      }
 
 }

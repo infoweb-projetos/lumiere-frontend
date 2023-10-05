@@ -2,7 +2,6 @@ export interface CreateCase {
     titulo: string;
     descricao: string;
     nomecliente: string | null;
-    createdAt: string | null;
   }
   
   export interface CreateCaseResponse {

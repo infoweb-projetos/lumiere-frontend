@@ -1,0 +1,17 @@
+import axiosInstance from '../../axiosinstance';
+import { CreateCase, CreateCaseResponse } from './criarCaso.interface';
+
+export const createCase = async ({
+    titulo,
+    descricao,
+    nomecliente,
+
+}: CreateCase): Promise<CreateCaseResponse> => {
+  const user = await axiosInstance.post<CreateCaseResponse>('/caso', {
+    titulo,
+    descricao,
+    nomecliente,
+  });
+
+  return user.data;
+};
