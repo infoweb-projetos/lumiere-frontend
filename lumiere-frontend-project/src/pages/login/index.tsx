@@ -12,16 +12,19 @@ import { LinkUnderline } from '../../components/link/link-underline';
 import { validationLoginSchema } from './validation';
 import { ErrorsForm } from './login.interface';
 import * as Yup from 'yup';
+import { useNavigate } from 'react-router-dom';
 
 export const Login = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [mainError, setMainError] = useState('');
   const [validationFormError, setValidationFormError] = useState<ErrorsForm>({ email: '', password: '' });
+  const navigate = useNavigate();
 
   const SignIn = useMutation(signIn, {
     onSuccess(data) {
       localStorage.setItem('token', data.accessToken);
+      navigate('/Authteste');
     },
     onError(error: ApiError) {
       setMainError(error.response!.data.message);

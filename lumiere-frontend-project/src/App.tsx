@@ -6,6 +6,7 @@ import './index.css';
 import Cadastro from './pages/cadastro';
 import { RequireAuth } from './auth/privateRoute';
 import { Login } from './pages/login';
+import { Authteste } from './components/auth';
 
 function App() {
   return (
@@ -18,17 +19,7 @@ function App() {
         path="/Authteste"
         element={
           <RequireAuth>
-            <div className="flex h-screen w-screen items-center justify-center gap-1 bg-gray-100">
-              <h1 className="text-gray-200">Autenticado</h1>
-              <button
-                className="rounded bg-primary-500 px-4 py-2 text-gray-200"
-                onClick={() => {
-                  localStorage.removeItem('token');
-                }}
-              >
-                Log out
-              </button>
-            </div>
+            <Authteste />
           </RequireAuth>
         }
       />
