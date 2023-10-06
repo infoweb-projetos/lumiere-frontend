@@ -5,4 +5,5 @@ export interface ICardProps {
     description : string,
     rating : string,
     photourl : string,
+    referencia: string,
 }

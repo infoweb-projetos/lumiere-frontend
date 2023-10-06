@@ -66,7 +66,10 @@ export default function ProcurarAdvogados () {
             </div>
            
             <div className="flex flex-row flex-wrap justify-between gap-x-10 gap-y-3 pb-20">
-                {filtro_barra.map((adv : PropsAdvs) => (<CardProcurarAdvogados key={adv.id} name={adv.nome} description="Advogado muito top" rating="4" photourl='/michael-s.svg'/>))}
+                {filtro_barra.map((adv : PropsAdvs) => (
+                    
+                
+                <CardProcurarAdvogados key={adv.id} name={adv.nome} description="Advogado muito top" rating="4" photourl='/michael-s.svg' referencia={"ProcurarAdvogados/"+ adv.id}/>))}
                 
             </div>
             <Footer />
