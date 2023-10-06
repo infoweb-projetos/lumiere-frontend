@@ -13,11 +13,22 @@ function App() {
       <Route path="/" element={<HomePage />} />
       <Route path="/ProcurarAdvogados" element={<ProcurarAdvogados />} />
       <Route path="/ProcurarAdvogados/:id" element={<Individual />} />
+      <Route path="/Cadastro" element={<Cadastro />} />
       <Route
-        path="/Cadastro"
+        path="/Authteste"
         element={
           <RequireAuth>
-            <Cadastro />
+            <div className="flex h-screen w-screen items-center justify-center gap-1 bg-gray-100">
+              <h1 className="text-gray-200">Autenticado</h1>
+              <button
+                className="rounded bg-primary-500 px-4 py-2 text-gray-200"
+                onClick={() => {
+                  localStorage.removeItem('token');
+                }}
+              >
+                Log out
+              </button>
+            </div>
           </RequireAuth>
         }
       />
