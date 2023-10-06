@@ -24,7 +24,7 @@ export const Login = () => {
       localStorage.setItem('token', data.accessToken);
     },
     onError(error: ApiError) {
-      setMainError(error.message);
+      setMainError(error.response!.data.message);
     },
   });
 
@@ -66,7 +66,7 @@ export const Login = () => {
   return (
     <div className="flex min-h-screen w-screen flex-col items-center justify-center gap-20">
       <img src="/logo-blue-text.svg" alt="Logo azul escrito Advocacia Lumiere" />
-      <div className="flex flex-col gap-4 rounded border border-gray-50 p-8">
+      <div className="flex w-96 flex-col gap-4 rounded border border-gray-200 p-8">
         <DisplayH1>Login</DisplayH1>
         <Label forLabel="email">Email</Label>
         <InputText erro={false} name="email" placeholder="email" value={email} onChange={setEmail} />
