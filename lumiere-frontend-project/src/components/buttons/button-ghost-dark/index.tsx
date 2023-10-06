@@ -1,39 +1,57 @@
-import { useRef } from 'react';
 import { IButtonProps } from '../button.interface';
-export const Button_ghost_dark = ({ size, title, type = 'button', func, referencia }: IButtonProps) => {
+
+export const Button_ghost_dark = ({
+  size,
+  title,
+  className,
+  type = 'button',
+  func,
+  referencia = undefined,
+}: IButtonProps) => {
   const handClick = () => {
     if (func) {
-      func();
+      void func();
     }
   };
 
   return (
     <>
-      {size === 'sm' ? (
-        <a href={referencia}>
+      {size === 'sm' && referencia === undefined ? (
         <button
-          className="w-fit flex h-11 items-center justify-center rounded bg-primary-800 px-8 py-4 font-mont text-sm font-semibold text-gray-200 shadow-black transition-all hover:bg-blue-600 active:bg-primary-500"
+          className={`${className!} flex h-11 w-fit items-center justify-center rounded bg-primary-800 px-8 py-4 font-mont text-sm font-semibold text-gray-200 shadow-black transition-all hover:bg-blue-600 active:bg-primary-500`}
           type={type}
-        
-        >
-         
-          {title}
-        </button>
-        </a>
-
-      ) : size === 'xl' ? (
-        <a href={referencia}>
-        <button
-          className="rounded bg-primary-800 px-8 py-4 font-mont text-xl font-semibold text-gray-200 shadow-black transition-all hover:bg-blue-600 active:bg-primary-500"
-          type={type}
-          onClick={func}
+          onClick={handClick}
         >
           {title}
         </button>
+      ) : size === 'xl' && referencia === undefined ? (
+        <button
+          className={`${className!} rounded bg-primary-800 px-8 py-4 font-mont text-xl font-semibold text-gray-200 shadow-black transition-all hover:bg-blue-600 active:bg-primary-500`}
+          type={type}
+          onClick={handClick}
+        >
+          {title}
+        </button>
+      ) : size === 'sm' && referencia ? (
+        <a href={referencia}>
+          <button
+            className={`${className!} flex h-11 w-fit items-center justify-center rounded bg-primary-800 px-8 py-4 font-mont text-sm font-semibold text-gray-200 shadow-black transition-all hover:bg-blue-600 active:bg-primary-500`}
+            type={type}
+          >
+            {title}
+          </button>
         </a>
-
+      ) : size === 'xl' && referencia ? (
+        <a href={referencia}>
+          <button
+            className={`${className!} rounded bg-primary-800 px-8 py-4 font-mont text-xl font-semibold text-gray-200 shadow-black transition-all hover:bg-blue-600 active:bg-primary-500`}
+            type={type}
+          >
+            {title}
+          </button>
+        </a>
       ) : (
-        <p className="text-sm">Esse tamanho não existe</p>
+        <div>Não existe</div>
       )}
     </>
   );

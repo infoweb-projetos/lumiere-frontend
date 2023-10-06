@@ -162,12 +162,13 @@ const Cadastro = () => {
 
   return (
     <div className="flex h-screen w-screen flex-col items-center justify-center">
-      <div className="flex w-96 flex-col items-center justify-center gap-4 rounded border-2 border-gray-200 p-8 transition-all">
+      <div className="flex w-96 flex-col items-center justify-center gap-4 rounded border border-gray-200 p-8 transition-all">
         <div className="w-full text-left">
           <DisplayH1>Cadastro</DisplayH1>
         </div>
 
         {fase === 1 && (
+          // eslint-disable-next-line @typescript-eslint/no-misused-promises
           <form className="flex flex-col gap-6" onSubmit={choise ? onSubmitFirst : onSubmitClient}>
             <div className="flex w-full flex-col">
               <Label forLabel="name">Name</Label>
@@ -235,6 +236,7 @@ const Cadastro = () => {
           </form>
         )}
         {fase === 2 && choise && (
+          // eslint-disable-next-line @typescript-eslint/no-misused-promises
           <form className="flex w-full flex-col gap-4" onSubmit={onSubmitSecond}>
             <button
               onClick={() => {
