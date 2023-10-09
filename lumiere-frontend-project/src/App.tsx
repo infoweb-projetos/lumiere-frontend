@@ -1,7 +1,7 @@
 import { Routes, Route} from 'react-router-dom'
 import ProcurarAdvogados from '../src/pages/procurar-advogados/';
 import Individual from '../src/components/cards/individual/';
-import CasoAdvogado from '../src/pages/casos-advogado/index.tsx';
+import CasoAdvogado from '../src/pages/casos-advogado/index';
 import HomePage from '../src/pages/homepage/';
 import "./index.css";
 import Cadastro from './pages/cadastro';
