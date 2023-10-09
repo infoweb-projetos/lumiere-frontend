@@ -3,8 +3,7 @@ import { IButtonProps } from '../button.interface';
 export const ButtonYellow = ({ size, title, type = 'button', func }: IButtonProps) => {
   const handClick = () => {
     if (func) {
-      // verifa se function foi passada
-      func(); // () => void
+      void func();
     }
   };
 
@@ -12,7 +11,7 @@ export const ButtonYellow = ({ size, title, type = 'button', func }: IButtonProp
     <>
       {size === 'sm' ? (
         <button
-          className=" w-fit flex h-11 items-center justify-center rounded bg-secondary-800 px-8 py-4 font-mont  text-sm font-semibold text-gray-200 shadow-black transition-all hover:bg-yellow-500 active:bg-secondary-500"
+          className=" flex h-11 w-fit items-center justify-center rounded bg-secondary-800 px-8 py-4 font-mont text-sm font-semibold text-gray-200 transition-all hover:bg-yellow-500 active:bg-secondary-500"
           type={type}
           onClick={handClick}
         >
@@ -20,7 +19,7 @@ export const ButtonYellow = ({ size, title, type = 'button', func }: IButtonProp
         </button>
       ) : size === 'xl' ? (
         <button
-          className=" w-fit rounded bg-secondary-800 px-8 py-4 font-mont text-xl font-semibold text-gray-200 shadow-black transition-all hover:bg-yellow-500 active:bg-secondary-500"
+          className=" w-fit rounded bg-secondary-800 px-8 py-4 font-mont text-xl font-semibold text-gray-200 transition-all hover:bg-yellow-500 active:bg-secondary-500"
           type={type}
           onClick={handClick}
         >

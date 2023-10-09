@@ -1,29 +1,34 @@
-import React, { useState } from 'react'
-import { MontH1 } from '../../texts/monteserrat/h1';
 import { MontP } from '../../texts/monteserrat/p';
 import { ICardProps } from '../card.interface.ts';
-import { Rating } from 'react-simple-star-rating'
-import { ButtonYellow } from '../../buttons/button-yellow-icon/index.tsx';
 import { Button_ghost_dark } from '../../buttons/button-ghost-dark/index.tsx';
+import { MontH2 } from '../../texts/monteserrat/h2/index.tsx';
+import { MontInfo } from '../../texts/monteserrat/info/index.tsx';
 
+export const CardProcurarAdvogados = ({ name, description, photourl }: ICardProps) => {
+  //   const onPointerMove = (value: number, index: number) => (value = parseInt(rating));
 
-export const CardProcurarAdvogados = ({name, description, rating, photourl, referencia} :  ICardProps) =>{
-    const onPointerMove = (value: number, index: number) => value=parseInt(rating);
-
-    return(
-        <div className='bg-white flex flex-row w-9/2 rounded border-2 border-gray-200 pr-10 '>
-            
-            <img className='object-cover'src={photourl}></img>
-            <div className=' pl-8 h-80 flex flex-col justify-around'>
-                <div className="flex flex-row w-full justify-between pt-4">
-                    <MontH1>{name}</MontH1>
-                    <Rating onClick={onPointerMove} disableFillHover={true} allowHover={false} fillColor="#D1BC87" SVGstyle={{'display':'inline'}}initialValue={parseInt(rating)}/>
-                    
-                </div>
-            
-            <MontP>{description}</MontP>
-            <div className='h-20 flex items-center'><Button_ghost_dark title="Contactar" size="sm" referencia={referencia}></Button_ghost_dark></div>
-            </div>
+  return (
+    <div className="flex w-full flex-row rounded border-2 border-gray-200 bg-white pr-10 ">
+      <img className="object-cover" src={photourl} alt=""></img>
+      <div className=" flex h-80 flex-col gap-6 p-8">
+        {/* <Rating
+          onClick={onPointerMove}
+          disableFillHover={true}
+          allowHover={false}
+          fillColor="#3F3F3F"
+          SVGstyle={{ display: 'inline' }}
+          initialValue={parseInt(rating)}
+        /> */}
+        <div className="flex flex-col gap-1">
+          <MontH2>{name}</MontH2>
+          <MontInfo className="text-gray-600">Bio do advogado</MontInfo>
         </div>
-    )
-}
+
+        <MontP className="h-28">{description}</MontP>
+        <div className="flex h-20 items-center">
+          <Button_ghost_dark title="Contactar" size="sm"></Button_ghost_dark>
+        </div>
+      </div>
+    </div>
+  );
+};
