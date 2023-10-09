@@ -105,9 +105,7 @@ export default function CriarCaso () {
               <InputText className="bg-white" erro={false} placeholder="Ex: Maria das Graças" name="nome" value={nomeCliente} onChange={setnomeCliente} />
               <MontInfo className="text-semantic-red">{validationFormError.nomecliente}</MontInfo>
             </div>
-            <LocalizationProvider>
-              <DateCalendar />
-            </LocalizationProvider>
+
 
             </div>
 

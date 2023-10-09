@@ -12,7 +12,7 @@ import { Comentario} from '../../components/cards/comentario'
 import { DisplaySubTitulo } from '../../components/texts/display-sm/subtitulo';
 import axiosInstance from '../../api/axiosinstance';
 import { LinhaCaso } from '../../components/cards/card-listar-casos';
-
+import { Button_ghost_dark } from '../../components/buttons/button-ghost-dark';
 interface PropsAdv{
     id : string | null,
 }
@@ -46,9 +46,9 @@ export default function CasoAdvogado () {
         <main className="pt-24 bg-gray-200 pl-16 pr-16 min-h-screen">
             <div className="flex flex-row justify-between mt-8 mb-4">
                 <DisplayH1 className="text-black text-[42px]">Casos em andamento</DisplayH1>
-                <div className="font-mont">
-                    {/*<button ref="/CriarCaso" className="bg-gray-50 mr-4 p-4 rounded-sm">Adicionar caso</button> */}
-                    <button className="bg-gray-50 p-4 rounded-sm">Excluir caso</button>
+                <div className="flex flex-row justify-center">
+                    <a className="font-mont p-3 bg-gray-50 h-fit rounded-sm mr-8" href='CriarCaso'> Adicionar Caso </a>
+                    <a className="font-mont p-3 bg-gray-50 h-fit rounded-sm">Excluir caso</a>
                 </div>
             </div>
             <div className="bg-primary-500 font-mont text-white text-[26px] rounded-sm grid grid-cols-5 font-bold p-4">
@@ -65,9 +65,9 @@ export default function CasoAdvogado () {
          )}                
             <div className="flex flex-row justify-between mt-8 mb-4">
                             <DisplayH1 className="text-black text-[42px]">Casos concluídos</DisplayH1>
-                            <div className="font-mont">
-                                <button className="bg-gray-50 p-4 rounded-sm">Excluir caso</button>
-                            </div>
+                      
+                                <a className="font-mont p-3 bg-gray-50 h-fit rounded-sm">Excluir caso</a>
+    
                         </div>
                         <div className="bg-primary-500 font-mont text-white text-[26px] rounded-sm grid grid-cols-5 font-bold p-4">
                                 <h1></h1>

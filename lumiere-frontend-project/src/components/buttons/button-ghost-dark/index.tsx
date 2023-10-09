@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+
 import { IButtonProps } from '../button.interface';
 export const Button_ghost_dark = ({ size, title, type = 'button', func, referencia }: IButtonProps) => {
   const handClick = () => {
