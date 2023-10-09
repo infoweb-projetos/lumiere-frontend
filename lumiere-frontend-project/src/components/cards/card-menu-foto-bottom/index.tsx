@@ -7,7 +7,7 @@ export const CardMenuBottom = ({ name, description, rating, photourl }: ICardPro
   const onPointerMove = () => parseInt(rating ? rating : '0');
 
   return (
-    <div className="flex w-[400px] flex-col rounded bg-white  ">
+    <div className="flex w-[400px] flex-col overflow-hidden rounded bg-white  ">
       <div className="flex flex-col justify-between pt-4">
         <div className="flex flex-col gap-4 p-8">
           <Rating

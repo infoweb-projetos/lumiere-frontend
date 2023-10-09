@@ -52,7 +52,7 @@ export default function HomePage() {
         <div className="z-10 mb-[-40px]">
           <button
             onClick={() => scrollToSection(advogado)}
-            className="rounded-full border border-gray-600 bg-gray-200 p-6 transition-all hover:bg-gray-50"
+            className="rounded-full border border-gray-400 bg-gray-200 p-6 transition-all hover:bg-gray-50"
           >
             <ArrowDown size={32} weight="regular" />
           </button>

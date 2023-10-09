@@ -8,7 +8,7 @@ export const CardAmarelo = ({ name, description, photourl }: ICardProps) => {
   //   const onPointerMove = (value: number, index: number) => (value = parseInt(rating));
 
   return (
-    <div className="flex w-[400px] flex-col rounded bg-white">
+    <div className="flex w-[400px] flex-col rounded overflow-hidden bg-white">
       <img className="h-52 w-full object-cover object-top" src={photourl} alt=""></img>
       <div className=" flex h-80 flex-col gap-6 p-8">
         {/* <Rating
@@ -25,7 +25,7 @@ export const CardAmarelo = ({ name, description, photourl }: ICardProps) => {
         </div>
 
         <MontP className="h-28">{description}</MontP>
-        <div className="flex h-20 items-center">
+        <div className="flex items-center">
           <ButtonYellow title="Contactar" size="sm"></ButtonYellow>
         </div>
       </div>
