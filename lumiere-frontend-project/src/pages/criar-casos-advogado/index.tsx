@@ -16,6 +16,8 @@ import { Label } from '../../components/label';
 import { InputText } from '../../components/input/input-text';
 import { MontInfo } from '../../components/texts/monteserrat/info';
 import { InputTextArea } from '../../components/input/input-textarea';
+import * as Toast from '@radix-ui/react-toast';
+
 
 export default function CriarCaso () {
     const [titulo, setTitulo] = useState('');
@@ -24,6 +26,7 @@ export default function CriarCaso () {
     const timerRef = React.useRef(0);
     const [open, setOpen] = React.useState(false);
     const a = false;
+    
 
     const [responseError, setResponseError] = useState('');
     const [validationFormError, setValidationFormError] = useState<ErrorsForm>({
@@ -105,10 +108,32 @@ export default function CriarCaso () {
               <InputText className="bg-white" erro={false} placeholder="Ex: Maria das Graças" name="nome" value={nomeCliente} onChange={setnomeCliente} />
               <MontInfo className="text-semantic-red">{validationFormError.nomecliente}</MontInfo>
             </div>
-
-
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DateCalendar />
+            </LocalizationProvider>
             </div>
+            <form className="flex w-full flex-col gap-4" onSubmit={onSubmit}>
 
+            <button type="submit">Criar Caso</button>
+              </form>
+
+          {/* Toast Error */}
+      <Toast.Provider swipeDirection="right">
+        <Toast.Root
+          className="data-[state=open]:animate-slideIn data-[state=closed]:animate-hide data-[swipe=end]:animate-swipeOut flex flex-col gap-x-[15px] rounded-md bg-semantic-red p-[15px] font-mont shadow-black data-[swipe=cancel]:translate-x-0 data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[swipe=cancel]:transition-[transform_200ms_ease-out]"
+          open={open}
+          onOpenChange={setOpen}
+        >
+          <Toast.Title className="mb-[5px] font-mont text-[15px] font-bold text-gray-200 [grid-area:_title]">
+            Infelizmente ocorreu um erro.
+          </Toast.Title>
+          <Toast.Description asChild>
+            <MontInfo className="text-[12px] text-white/80">{responseError}</MontInfo>
+          </Toast.Description>
+        </Toast.Root>
+        <Toast.Viewport className="fixed bottom-0 right-0 z-[2147483647] m-0 flex w-[390px] max-w-[100vw] list-none flex-col gap-[10px] p-[var(--viewport-padding)] outline-none [--viewport-padding:_25px]" />
+      </Toast.Provider>
+    
           </main>        
         
         
