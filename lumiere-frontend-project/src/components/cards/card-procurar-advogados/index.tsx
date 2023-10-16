@@ -8,7 +8,7 @@ export const CardProcurarAdvogados = ({ name, description, photourl }: ICardProp
   //   const onPointerMove = (value: number, index: number) => (value = parseInt(rating));
 
   return (
-    <div className="flex w-full flex-row rounded border-2 border-gray-200 bg-white pr-10 ">
+    <div className="flex w-full flex-row overflow-hidden rounded border-2 border-gray-200 bg-white pr-10 ">
       <img className="object-cover" src={photourl} alt=""></img>
       <div className=" flex h-80 flex-col gap-6 p-8">
         {/* <Rating

@@ -18,6 +18,7 @@ interface PropsAdvsList {
   historico: string;
   areaDeAtuacao: string;
 }
+
 export const AdvogadoIndividual = ({ id }: PropsAdv) => {
   const a = true;
   const [advs, setAdvs] = useState([]);
@@ -31,13 +32,11 @@ export const AdvogadoIndividual = ({ id }: PropsAdv) => {
     loadAdvs();
   }, []);
 
-  console.log(id);
   return (
     <>
       {a ? <MenuNoLogin /> : <MenuLogin />}
       <div className="flex flex-row">
         {advs.map((adv: PropsAdvsList, index: number) => {
-          console.log(adv.id);
           if (id == index) {
             return (
               <CardPageAdvogadoIndividual
@@ -52,7 +51,8 @@ export const AdvogadoIndividual = ({ id }: PropsAdv) => {
           }
         })}
       </div>
-      <div className="bg-gray-200 pl-20 pr-20 pt-8">
+      <div className="bg-gray-200 pl-20 pr-20 pt-8 flex flex-col items-center">
+      <div className='flex flex-col max-w-[1500px] w-full mb-8'>
         <MontH2 className="mb-10 text-3xl">Avaliações</MontH2>
         <div className="bg-white">
           <Comentario
@@ -62,6 +62,7 @@ export const AdvogadoIndividual = ({ id }: PropsAdv) => {
             rating={'4'}
             photourl={'/comentario-exemplo.svg'}
           />
+        </div>
         </div>
       </div>
       <Footer />
