@@ -25,6 +25,7 @@ export const AdvogadoIndividual = ({ id }: PropsAdv) => {
     const response = await axiosInstance.get('/advogado');
     return response.data
   }
+  
   const a = true;
   
   const advs = useQuery("advs", loadAdvs)
