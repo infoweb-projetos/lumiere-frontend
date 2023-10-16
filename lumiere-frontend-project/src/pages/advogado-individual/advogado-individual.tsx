@@ -6,6 +6,7 @@ import { Footer } from '../../components/footer';
 import { CardPageAdvogadoIndividual } from '../../components/cards/card-page-advogado-individual';
 import { Comentario } from '../../components/cards/comentario';
 import axiosInstance from '../../api/axiosinstance';
+import { useQuery } from 'react-query';
 
 interface PropsAdv {
   id: number | null;
@@ -20,23 +21,19 @@ interface PropsAdvsList {
 }
 
 export const AdvogadoIndividual = ({ id }: PropsAdv) => {
+  async function loadAdvs() {
+    const response = await axiosInstance.get('/advogado');
+    return response.data
+  }
   const a = true;
-  const [advs, setAdvs] = useState([]);
-
-  useEffect(() => {
-    async function loadAdvs() {
-      const response = await axiosInstance.get('/advogado');
-
-      setAdvs(response.data);
-    }
-    loadAdvs();
-  }, []);
+  
+  const advs = useQuery("advs", loadAdvs)
 
   return (
     <>
       {a ? <MenuNoLogin /> : <MenuLogin />}
       <div className="flex flex-row">
-        {advs.map((adv: PropsAdvsList, index: number) => {
+        {advs.isFetched && advs.data.map((adv: PropsAdvsList, index: number) => {
           if (id == index) {
             return (
               <CardPageAdvogadoIndividual
