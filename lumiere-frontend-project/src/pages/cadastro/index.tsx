@@ -12,16 +12,18 @@ import { validationCadastroSchemaFirst, validationCadastroSecond } from './cadas
 import { useMutation } from 'react-query';
 import * as Yup from 'yup';
 import { signUpLawyer } from '../../api/services/advogados';
-import { ApiError, SignUpLawyerResponse } from '../../api/services/advogados/singUpLawyer.interface';
+import { ApiError } from '../../api/services/advogados/singUpLawyer.interface';
 import { DisplayH1 } from '../../components/texts/display-sm/h1';
 import * as Switch from '@radix-ui/react-switch';
 import * as React from 'react';
 import * as Toast from '@radix-ui/react-toast';
+import { useNavigate } from 'react-router-dom';
 
 const Cadastro = () => {
   const [fase, setFase] = useState(1);
   const [open, setOpen] = React.useState(false);
   const timerRef = React.useRef(0);
+  const navigate = useNavigate()
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -47,8 +49,8 @@ const Cadastro = () => {
   });
 
   const signUpLawyerMutation = useMutation(signUpLawyer, {
-    onSuccess: (data: SignUpLawyerResponse) => {
-      console.log(data);
+    onSuccess: () => {
+      navigate('/')
     },
     onError: (error: ApiError) => {
       window.clearTimeout(timerRef.current);
