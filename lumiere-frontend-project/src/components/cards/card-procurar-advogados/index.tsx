@@ -4,7 +4,7 @@ import { Button_ghost_dark } from '../../buttons/button-ghost-dark/index.tsx';
 import { MontH2 } from '../../texts/monteserrat/h2/index.tsx';
 import { MontInfo } from '../../texts/monteserrat/info/index.tsx';
 
-export const CardProcurarAdvogados = ({ name, description, photourl }: ICardProps) => {
+export const CardProcurarAdvogados = ({ name, description, photourl, referencia }: ICardProps) => {
   //   const onPointerMove = (value: number, index: number) => (value = parseInt(rating));
 
   return (
@@ -26,7 +26,9 @@ export const CardProcurarAdvogados = ({ name, description, photourl }: ICardProp
 
         <MontP className="h-28">{description}</MontP>
         <div className="flex h-20 items-center">
-          <Button_ghost_dark title="Contactar" size="sm"></Button_ghost_dark>
+          <a href={referencia}>
+            <Button_ghost_dark title="Contactar" size="sm"></Button_ghost_dark>
+          </a>
         </div>
       </div>
     </div>
