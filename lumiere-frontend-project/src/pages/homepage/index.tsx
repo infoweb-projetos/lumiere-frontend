@@ -11,9 +11,11 @@ import { GetLawyer } from '../../api/services/advogados/get-lawyers';
 import { ResponseLawyer } from '../../api/services/advogados/get-lawyers/get-lawyer.interface';
 import { ArrowDown } from '@phosphor-icons/react';
 import { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function HomePage() {
   const a = true;
+  const navigate = useNavigate();
 
   const advs = useQuery(['advs'], GetLawyer);
 
@@ -43,7 +45,7 @@ export default function HomePage() {
             <MontP className="max-w-md pb-8 pt-8 text-[18px]">
               Crie uma conta na advocacia lumiere e tenha acesso a diversos mecanismos para auxiliar no seu caso!
             </MontP>
-            <Button_ghost_dark size="sm" title="CRIAR CONTA" type="submit" />
+            <Button_ghost_dark size="sm" title="CRIAR CONTA" type="button" func={() => navigate('/cadastro')} />
           </div>
           <div>
             <img src="/banner.svg" alt="Um advogado e varios quadradros"></img>
@@ -68,7 +70,7 @@ export default function HomePage() {
                     return (
                       <CardAmarelo
                         key={index}
-                        referencia=""
+                        referencia={'ProcurarAdvogados/' + adv.id}
                         name={adv.nome}
                         description="Advogado muito top"
                         photourl="/michael-s.svg"
@@ -90,7 +92,6 @@ export default function HomePage() {
                   if (index < 3) {
                     return (
                       <CardMenuBottom
-                        referencia=""
                         key={adv.id}
                         name={adv.nome}
                         description="Advogado muito top"
@@ -112,7 +113,7 @@ export default function HomePage() {
                 <DisplayH1 className="text-[56px] text-blue-300">ADVOGADOS</DisplayH1>
               </DisplayH1>
             </div>
-            <Button_ghost_dark size="xl" title="CRIAR CONTA" type="submit" />
+            <Button_ghost_dark size="xl" title="CRIAR CONTA" type="button" func={() => navigate('/cadastro')} />
           </div>
         </div>
         <Footer />
