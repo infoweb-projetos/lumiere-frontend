@@ -33,27 +33,29 @@ export const MenuNoLogin = () => {
 
   return (
     <nav
-      className={`fixed left-0 top-0 z-10 flex w-full min-w-[675px] justify-between border-b ${
+      className={`fixed left-0 top-0  z-20 flex w-full min-w-[675px] justify-center border-b ${
         activeBorder ? 'border-gray-300' : ''
       } bg-gray-200 pb-4 pl-16 pr-16 pt-4 transition-all`}
     >
-      <a href="/" className="flex items-center">
-        <img className="hidden lg:block" src="/logo-blue-text.svg" alt="" />
-        <img className="lg:hidden" src="/logo-blue-al.svg" alt="" />
-      </a>
-      <ul className="flex items-center gap-8 font-mont text-base text-gray-800">
-        <li>
-          {' '}
-          <LinkUnderline text="Encontrar Advogados" href="/ProcurarAdvogados" />
-        </li>
+      <div className="flex w-full max-w-[1528px] items-center justify-between gap-16">
+        <a href="/" className="flex items-center">
+          <img className="hidden lg:block" src="/logo-blue-text.svg" alt="" />
+          <img className="lg:hidden" src="/logo-blue-al.svg" alt="" />
+        </a>
+        <ul className="flex items-center gap-8 font-mont text-base text-gray-800">
+          <li>
+            {' '}
+            <LinkUnderline text="Encontrar Advogados" href="/ProcurarAdvogados" />
+          </li>
 
-        <li>
-          <div className="flex gap-8">
-            <Button_ghost_light title="Login" size="sm" func={handleLogin} className="shadow-none" />
-            <Button_blue title="Cadastro" size="sm" func={handleCadastro} className="shadow-none" />
-          </div>
-        </li>
-      </ul>
+          <li>
+            <div className="flex gap-8">
+              <Button_ghost_light title="Login" size="sm" func={handleLogin} className="shadow-none" />
+              <Button_blue title="Cadastro" size="sm" func={handleCadastro} className="shadow-none" />
+            </div>
+          </li>
+        </ul>
+      </div>
     </nav>
   );
 };
