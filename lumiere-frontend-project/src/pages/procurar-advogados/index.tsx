@@ -31,7 +31,7 @@ export default function ProcurarAdvogados() {
       }
     }
     loadAdvs();
-  });
+  }, []);
 
   const filtro_barra = advs.data?.filter((adv: ResponseLawyer) =>
     adv.nome.toLowerCase().includes(search.toLowerCase()),
