@@ -17,7 +17,13 @@ import { InputText } from '../../components/input/input-text';
 import { MontInfo } from '../../components/texts/monteserrat/info';
 import { InputTextArea } from '../../components/input/input-textarea';
 import * as Toast from '@radix-ui/react-toast';
+import { useNavigate } from 'react-router-dom';
+import 'react-day-picker/dist/style.css';
 
+import { format } from 'date-fns';
+
+import { DayPicker } from 'react-day-picker';
+import 'react-day-picker/dist/style.css';
 
 export default function CriarCaso () {
     const [titulo, setTitulo] = useState('');
@@ -26,6 +32,14 @@ export default function CriarCaso () {
     const timerRef = React.useRef(0);
     const [open, setOpen] = React.useState(false);
     const a = false;
+    const navigate = useNavigate();
+
+    const [selected, setSelected] = useState<Date>();
+
+    let footer = <p>Please pick a day.</p>;
+    if (selected) {
+      footer = <p>You picked {format(selected, 'PP')}.</p>;
+    }
     
 
     const [responseError, setResponseError] = useState('');
@@ -93,28 +107,34 @@ export default function CriarCaso () {
           <main className=" bg-gray-200 p-48 min-h-screen">
             <div className='bg-white pt-16 pb-16 pl-24 pr-24'>
             <div className="flex flex-col mb-8">
-              <DisplayH1 className='text-[#4A4A4A] mb-4 text-[40px]'>Procurar advogados</DisplayH1>
+              <DisplayH1 className='text-[#4A4A4A] mb-4 text-[40px]'>Criar caso</DisplayH1>
               <label className="font-mont text-[20px] font-semibold">Titulo</label>
               <InputText className="bg-white "erro={false} placeholder="Ex: Pensão alimentícia" name="titulo" value={titulo} onChange={setTitulo} />
               <MontInfo className="text-semantic-red">{validationFormError.titulo}</MontInfo>
-            </div>
-            <div className=" flex flex-col mb-8">
-              <label className="font-mont text-[20px] font-semibold">Descrição</label>
-              <InputTextArea className="bg-white h-36" erro={false} placeholder="" name="descricao" value={descricao} onChange={setDescricao} />
-              <MontInfo className="text-semantic-red">{validationFormError.descricao}</MontInfo>
             </div>
             <div className=" flex flex-col mb-8">
               <label className="font-mont text-[20px] font-semibold">Nome do cliente</label>
               <InputText className="bg-white" erro={false} placeholder="Ex: Maria das Graças" name="nome" value={nomeCliente} onChange={setnomeCliente} />
               <MontInfo className="text-semantic-red">{validationFormError.nomecliente}</MontInfo>
             </div>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DateCalendar />
-            </LocalizationProvider>
+            <div className='flex flex-row w-full  justify-between gap-4'>
+            <div className=" flex flex-col mb-8 w-full">
+              <label className="font-mont text-[20px] font-semibold">Descrição</label>
+              <InputTextArea className="bg-white h-full w-full" erro={false} placeholder="" name="descricao" value={descricao} onChange={setDescricao} />
+              <MontInfo className="text-semantic-red">{validationFormError.descricao}</MontInfo>
             </div>
-            <form className="flex w-full flex-col gap-4" onSubmit={onSubmit}>
+            <DayPicker
+                mode="single"
+                selected={selected}
+                onSelect={setSelected}
+                
+                className='font-mont'
+    />
+            </div>
+            </div>
+            <form className="flex w-full flex-row-reverse gap-4 bg-white pr-24 pb-16" onSubmit={onSubmit}>
 
-            <button type="submit">Criar Caso</button>
+            <button onClick={() => navigate('/Casos')} className="hover:bg-blue-800 bg-text-[20px] bg-primary-500 w-fit font-mont text-white pt-3 pb-3 pl-6 pr-6 rounded-sm"type="submit">Criar Caso</button>
               </form>
 
           {/* Toast Error */}
