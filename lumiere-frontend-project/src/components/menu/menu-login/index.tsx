@@ -24,7 +24,7 @@ export const MenuLogin = () => {
         activeBorder ? 'border-gray-300' : ''
       } bg-gray-200 pb-4 pl-16 pr-16 pt-4 transition-all`}
     >
-      <div className="flex max-w-[1528px] flex-col items-center gap-16">
+      <div className="flex w-full flex-row items-center justify-between gap-16 pl-16 pr-16 ">
         <a href="/" className="flex items-center">
           <img className="hidden lg:block" src="/logo-blue-text.svg" alt="" />
           <img className="lg:hidden" src="/logo-blue-al.svg" alt="" />
@@ -44,14 +44,16 @@ export const MenuLogin = () => {
             <LinkUnderline text="Batepapo" href="/Casos" />
           </li>
 
-          <li>
-            <a href="google.com" className="">
+          <li className='group relative inline-block hover:block'>
               <User
                 weight="fill"
                 size={44}
                 className="rounded bg-secondary-500 p-2 text-secondary-800 transition-all hover:brightness-[105%]"
               />
-            </a>
+              <div className='group-hover:block hidden absolute bg-white p-4 w-[150px]'>
+                <a href="#" className='block mb-10'>Editar Perfil</a>
+                <a href="#" className='block'>Logout</a>
+            </div>
           </li>
         </ul>
       </div>
