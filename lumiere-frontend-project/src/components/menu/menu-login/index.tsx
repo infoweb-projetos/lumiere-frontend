@@ -51,7 +51,7 @@ export const MenuLogin = () => {
                 className="rounded bg-secondary-500 p-2 text-secondary-800 transition-all hover:brightness-[105%]"
               />
               <div className='group-hover:block hidden absolute bg-white p-4 w-[150px]'>
-                <a href="#" className='block mb-10'>Editar Perfil</a>
+                <a href="/EditarPerfil" className='block mb-10 '>Editar Perfil</a>
                 <a href="#" className='block'>Logout</a>
             </div>
           </li>
