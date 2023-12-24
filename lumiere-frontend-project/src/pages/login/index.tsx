@@ -23,6 +23,7 @@ export const Login = () => {
 
   const SignIn = useMutation(signIn, {
     onSuccess(data) {
+      console.log(data)
       localStorage.setItem('token', data.accessToken);
       navigate('/Authteste');
     },
