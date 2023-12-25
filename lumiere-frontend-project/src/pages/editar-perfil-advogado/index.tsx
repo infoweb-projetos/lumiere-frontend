@@ -1,33 +1,17 @@
-import {DateCalendar} from '@mui/x-date-pickers/DateCalendar'; 
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { useEffect, useState } from 'react';
 import * as Yup from 'yup';
-import { ErrorsForm} from './caso.interface';
 import { useMutation, useQuery } from 'react-query';
-import {createCaseSchema} from './caso.validation'
-import { ApiError, CreateCaseResponse } from '../../api/services/casos/criarCaso.interface';
-import { createCase } from '../../api/services/casos';
 import { MenuLogin } from '../../components/menu/menu-login';
 import { MenuNoLogin } from '../../components/menu/menu-no-login';
 import { DisplayH1 } from '../../components/texts/display-sm/h1';
-import { Label } from '../../components/label';
-import { InputText } from '../../components/input/input-text';
-import { MontInfo } from '../../components/texts/monteserrat/info';
-import { InputTextArea } from '../../components/input/input-textarea';
-import { useNavigate, useParams } from 'react-router-dom';
-import { editLawyer, signUpLawyer } from '../../api/services/advogados';
-import { SignUpLawyerResponse } from '../../api/services/advogados/singUpLawyer.interface';
 import { validationEditarSchema } from './editar.validation';
-import { InputPassword } from '../../components/input/input-password';
-import { MontP } from '../../components/texts/monteserrat/p';
-import { Switch } from '@radix-ui/react-switch';
 import * as React from 'react';
-import * as Toast from '@radix-ui/react-toast';
-import { Button_blue } from '../../components/buttons/button-blue-icon';
-import axios from 'axios';
 import { GetLawyer } from '../../api/services/advogados/get-lawyers';
 import { InputEdit } from '../../components/input/input-edit';
+import { Profile, Root } from '../../api/services/user/profile';
+import { ErrorsForm } from '../cadastro/cadastro.interface';
+import { ApiError } from '../../api/auth/singIninterface';
+import { editLawyer, signUpLawyer } from '../../api/services/advogados';
 
 interface PropsAdvsList {
     id: number;
@@ -51,6 +35,8 @@ export default function EditarPerfil () {
     const [cnpj, setCnpj] = useState('');
     const [descricao, setDecricao] = useState('');
 
+    const [dataUser, setDataUser] = useState<Root | undefined>()
+
     const timerRef = React.useRef(0);
 
 
@@ -63,18 +49,27 @@ export default function EditarPerfil () {
       passwordConfirm: '',
     });
 
-    const signUpLawyerMutation = useMutation(editLawyer, { //put right here
-        onSuccess: (data: SignUpLawyerResponse) => {
-          console.log(data);
-        },
-        onError: (error: ApiError) => {
-          window.clearTimeout(timerRef.current);
-          timerRef.current = window.setTimeout(() => {
-            setOpen(true);
-          }, 100);
-          setResponseError(error.response?.data.message || 'Um erro inesperado ocorreu.');
-        },
-      });
+    const mutateProfile = useMutation(Profile, {
+      onSuccess: (data) => {
+        setDataUser(data)
+        setName(data.nome)
+      }, onError: () => {
+        console.log('erro')
+      }
+    })
+
+    const signUpLawyerMutation = useMutation(editLawyer, {
+      onSuccess: () => {
+      },
+      onError: (error: ApiError) => {
+        setResponseError(error.response?.data.message || 'Um erro inesperado ocorreu.');
+      },
+    });
+
+    useEffect(() => {
+      console.log('opa')
+      mutateProfile.mutate()
+    },[])
     
       const validateForm = async (): Promise<boolean> => {
         try {
