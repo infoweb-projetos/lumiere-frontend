@@ -16,7 +16,11 @@ function App() {
       <Route path="/ProcurarAdvogados" element={<ProcurarAdvogados />} />
       <Route path="/ProcurarAdvogados/:id" element={<Individual />} />
       <Route path="/Cadastro" element={<Cadastro />} />
-      <Route path="/EditarPerfil/:id" element={<EditarPerfil />} />
+      <Route path="/EditarPerfil" element={
+                <RequireAuth>
+                <EditarPerfil />
+              </RequireAuth>
+      } />
       <Route
         path="/Authteste"
         element={

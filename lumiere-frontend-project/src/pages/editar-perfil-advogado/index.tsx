@@ -16,7 +16,7 @@ import { InputText } from '../../components/input/input-text';
 import { MontInfo } from '../../components/texts/monteserrat/info';
 import { InputTextArea } from '../../components/input/input-textarea';
 import { useNavigate, useParams } from 'react-router-dom';
-import { signUpLawyer } from '../../api/services/advogados';
+import { editLawyer, signUpLawyer } from '../../api/services/advogados';
 import { SignUpLawyerResponse } from '../../api/services/advogados/singUpLawyer.interface';
 import { validationEditarSchema } from './editar.validation';
 import { InputPassword } from '../../components/input/input-password';
@@ -27,6 +27,7 @@ import * as Toast from '@radix-ui/react-toast';
 import { Button_blue } from '../../components/buttons/button-blue-icon';
 import axios from 'axios';
 import { GetLawyer } from '../../api/services/advogados/get-lawyers';
+import { InputEdit } from '../../components/input/input-edit';
 
 interface PropsAdvsList {
     id: number;
@@ -40,9 +41,9 @@ interface PropsAdvsList {
 
 export default function EditarPerfil () {
 
-    const { id } = useParams();
-    const advs = useQuery('advs', GetLawyer);
-    
+    const a = false;
+    const advs = useQuery(['advs'], GetLawyer);
+    const token = localStorage.getItem('token');
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -62,7 +63,7 @@ export default function EditarPerfil () {
       passwordConfirm: '',
     });
 
-    const signUpLawyerMutation = useMutation(signUpLawyer, {
+    const signUpLawyerMutation = useMutation(editLawyer, { //put right here
         onSuccess: (data: SignUpLawyerResponse) => {
           console.log(data);
         },
@@ -135,93 +136,28 @@ export default function EditarPerfil () {
       }
     
       return (
+        <>
         
-        <main className="bg-gray-200 p-48 min-h-screen">
-        <DisplayH1>Meu Perfil</DisplayH1>
-        
-          <div className="bg-blue-300 ">
-              
-
-            <form className="flex flex-col gap-6 ">
-
-                            <div className="flex w-full flex-col">
-                            <Label forLabel="name" className="text-white">Name</Label>
-                            <InputText className="bg-blue-300"onChange={setName} erro={false} placeholder="name" name="name" value={name} />
-                            <MontInfo className="text-semantic-red">{validationFormError.name}</MontInfo>
-                            </div>
-                            <div className="flex w-full flex-col">
-                            <Label forLabel="email">Email</Label>
-                            <InputText onChange={setEmail} value={email} erro={false} placeholder="email" name="email" className="" />
-                            <MontInfo className="text-semantic-red">{validationFormError.email}</MontInfo>
-                            </div>
-                            <div className="flex w-full flex-col">
-                            <Label forLabel="password">Senha</Label>
-                            <InputPassword
-                                value={password}
-                                onChange={setPassword}
-                                erro={false}
-                                placeholder="password"
-                                name="password"
-                            />
-                            <MontInfo className="text-semantic-red">{validationFormError.password}</MontInfo>
-                            </div>
-                            <div className="flex w-full flex-col">
-                            <Label forLabel="passwordConfirm">Confirmar a senha</Label>
-                            <InputPassword
-                                value={passwordConfirm}
-                                onChange={setPasswordConfirm}
-                                erro={false}
-                                placeholder="password"
-                                name="passwordConfirm"
-                            />
-                            <MontInfo className="text-semantic-red">{validationFormError.passwordConfirm}</MontInfo>
-                            </div>
-
-
-
-                            <div className="flex w-full flex-col">
-                            <Label forLabel="historico">Descrição</Label>
-                            <textarea
-                                maxLength={200}
-                                className=" rounded border-[1px] bg-gray-200 pl-4 pr-4 pt-2 font-mont text-gray-800 transition-all focus:outline-none focus:outline-offset-0 focus:outline-gray-400/50"
-                                name="historico"
-                                value={descricao}
-                                onChange={(e) => setDecricao(e.target.value)}
-                            ></textarea>
-                            <MontInfo className="text-semantic-red">{validationFormError.historico}</MontInfo>
-                            </div>
-                            <div className="flex w-full flex-col">
-                            <Label forLabel="cnpj">CNPJ</Label>
-                            <InputText erro={false} placeholder="CNPJ" name="cnpj" value={cnpjMask(cnpj)} onChange={setCnpj} />
-                            <MontInfo className="text-semantic-red">{validationFormError.cnpj}</MontInfo>
-                            </div>
-                            <Button_blue size="sm" title="Editar" type="submit" />
-                        </form>
-                        
-                    
-                    {/* Toast Error */}
-                    <Toast.Provider swipeDirection="right">
-                        <Toast.Root
-                        className="data-[state=open]:animate-slideIn data-[state=closed]:animate-hide data-[swipe=end]:animate-swipeOut flex flex-col gap-x-[15px] rounded-md bg-semantic-red p-[15px] font-mont shadow-black data-[swipe=cancel]:translate-x-0 data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[swipe=cancel]:transition-[transform_200ms_ease-out]"
-
-                        >
-                        <Toast.Title className="mb-[5px] font-mont text-[15px] font-bold text-gray-200 [grid-area:_title]">
-                            Infelizmente ocorreu um erro.
-                        </Toast.Title>
-                        <Toast.Description asChild>
-                            <MontInfo className="text-[12px] text-white/80">{responseError}</MontInfo>
-                        </Toast.Description>
-                        </Toast.Root>
-                        <Toast.Viewport className="fixed bottom-0 right-0 z-[2147483647] m-0 flex w-[390px] max-w-[100vw] list-none flex-col gap-[10px] p-[var(--viewport-padding)] outline-none [--viewport-padding:_25px]" />
-                    </Toast.Provider>
-                    
-
-
-
-
+        {a ? <MenuNoLogin /> : <MenuLogin />}
+        {advs.isFetched &&
+          advs.data &&
+          advs.data.map((adv) => {
+            if (token == adv.id) {
+                setName(adv.nome)
+            }
+            console.log(name)
+          })}
+        <main className='bg-gray-200'>
+          <DisplayH1 className='pl-32 pr-32 pt-24 pb-8'>Meu Perfil</DisplayH1>
+            <div className="bg-blue-300 flex flex-row pl-32 pr-32">
+              <div className='flex flex-row'>
+                <div><img className="-rotate-90 " src="/elizia-advogada.svg" alt=''/></div>
+                <InputEdit className="ml-10" placeholder={name} onChange={setName} erro={false} name="name" value={name} ></InputEdit>
             </div>
-            </main>
-                    
+          </div>
+        </main>
+        
+        </>
                     
             
                             
