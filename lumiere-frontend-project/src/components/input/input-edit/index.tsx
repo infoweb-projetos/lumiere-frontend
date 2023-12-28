@@ -16,7 +16,7 @@ export const InputEdit = ({ placeholder, className, name, value, erro, onChange 
       name={name}
       value={value && value}
       onChange={(e) => onChange(e.target.value)}
-      className={`font-mont bg-blue-300 text-white h-10 ${
+      className={`font-mont bg-blue-300  h-10 ${
         className ? className : ''
       } ${erro ? 'border-semantic-red' : ''}`}
     

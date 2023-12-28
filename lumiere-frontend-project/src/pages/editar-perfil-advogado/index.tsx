@@ -68,7 +68,8 @@ export default function EditarPerfil () {
     })
 
     const editLawyerMutation = useMutation(editLawyer, {
-      onSuccess: () => {
+      onSuccess: (data) => {
+        console.log("Sucesso na edição do advogado:", data);
       },
       onError: (error: ApiError) => {
         setResponseError(error.response?.data.message || 'Um erro inesperado ocorreu.');
@@ -123,7 +124,7 @@ export default function EditarPerfil () {
         const isValid = await validateFormLaywer();
     
         if (isValid) {
-          console.log(descricao);
+          console.log("aaaaaa");
           editLawyerMutation.mutate({
             email: email,
             nome: name,
@@ -168,7 +169,6 @@ export default function EditarPerfil () {
     
         const isValid = await validateFormClient();
         if (isValid) {
-          console.log("aaaaaa");
           editClientMutation.mutate({
             email: email,
             nome: name,
@@ -198,13 +198,13 @@ export default function EditarPerfil () {
         <main className='bg-gray-200 min-h-screen '>
         <DisplayH1 className='pl-32 pr-32 pt-24 pb-8 '>Meu perfil</DisplayH1>
         {isAdvogado ?  
-        <form className='pl-48 pr-48 bg-blue-300 flex flex-col items-center h-full w-full gap-y-6 p-8' onSubmit={(e) => onSubmitLaywer(e)}>
+        <form className='pl-48 pr-48 pt-32 pb-32 bg-blue-300 flex flex-col items-center h-full w-full gap-y-6 p-8' onSubmit={(e) => onSubmitLaywer(e)}>
         <div className='flex flex-row w-1/2 h-1/2'>
           <div ><img className="h-5/4 -rotate-90" src="elizia-advogada.svg"></img></div>
-          <div className='flex flex-col w-full ml-10 mt-4'>
+          <div className='flex flex-col w-full ml-10 '>
             <div className='w-full flex flex-col'>
               <label className="font-dm text-white text-2xl">Nome completo</label>
-              <InputEdit className=" h-10 rounded border-[1px] border-2 border-white text-base text-black bg-white" name="name" placeholder={name} onChange={setName} value={name} erro={false}></InputEdit>
+              <InputEdit className=" h-10 rounded border-[1px] border-2 border-white text-base text-black bg-white" name="name"  onChange={setName} value={name} erro={false}></InputEdit>
               <MontInfo className="text-semantic-red">{validationFormError.name}</MontInfo>
             </div>
             <div className='w-full flex flex-col'>
@@ -236,20 +236,13 @@ export default function EditarPerfil () {
         </div>
         <div className='flex flex-col w-full h-1/2'>
           <div className='flex flex-col '>
-            <label className="font-dm text-white text-2xl">Email</label>
-            <InputEdit className="h-10 rounded border-[1px] border-2 border-white text-base bg-white text-black" name="email" placeholder={email} onChange={setEmail} value={email} erro={false}></InputEdit>
+            <label className="font-dm text-white text-2xl">CNPJ</label>
+            <InputEdit className="h-10 rounded border-[1px] border-2 border-white text-base bg-white text-black" name="cnpj" value={cnpjMask(cnpj)} onChange={setCnpj} erro={false}></InputEdit>
             <MontInfo className="text-semantic-red">{validationFormError.email}</MontInfo>
           </div>
           <div className='flex flex-col w-full'>
-            <label className="font-dm text-white text-2xl">Senha</label>
-            <InputPasswordEdit
-              value={password}
-              onChange={setPassword}
-              erro={false}
-              placeholder={password}
-              name="password"
-            />
-            <MontInfo className="text-semantic-red">{validationFormError.password}</MontInfo>
+            <label className="font-dm text-white text-2xl">Áreas de atuação</label>
+            <InputEdit className="h-10 rounded border-[1px] border-2 border-white text-base bg-white text-black" name="areadeatuacao" value={areaatuacao} onChange={setAreaAtuacao} erro={false}></InputEdit>
           </div>
         </div>
       </div>
@@ -262,7 +255,7 @@ export default function EditarPerfil () {
         
         :
         <>
-        <form className='bg-blue-300 flex flex-col items-center h-full w-full gap-y-6 p-8' onSubmit={(e) => onSubmitClient(e)}>
+        <form className='pt-32 pb-32 bg-blue-300 flex flex-col items-center h-full w-full gap-y-6 p-8' onSubmit={(e) => onSubmitClient(e)}>
             <div><img className="-rotate-90" src="elizia-advogada.svg"></img></div>
             <div className='flex flex-col w-1/4'>
               <label className="font-dm text-white text-2xl">Nome completo</label>
@@ -271,7 +264,7 @@ export default function EditarPerfil () {
             </div>
             <div className='flex flex-col w-1/4'>
               <label className="font-dm text-white text-2xl">Email</label>
-              <InputEdit className="h-10 rounded border-[1px] border-2 border-white text-base bg-white text-black" name="email" placeholder={email} onChange={setEmail} value={email} erro={false}></InputEdit>
+              <InputEdit className="h-10 rounded border-[1px] text-black border-2 border-white text-base bg-white" name="email" placeholder={email} onChange={setEmail} value={email} erro={false}></InputEdit>
               <MontInfo className="text-semantic-red">{validationFormError.email}</MontInfo>
             </div>
             <div className='flex flex-col w-1/4'>
@@ -285,7 +278,7 @@ export default function EditarPerfil () {
               />
               <MontInfo className="text-semantic-red">{validationFormError.password}</MontInfo>
             </div>
-              <button className="hover:bg-blue-800 bg-text-[20px] bg-primary-500 w-fit font-mont text-white pt-3 pb-3 pl-6 pr-6 rounded-sm"type="submit">Salvar alterações</button>
+              <button className="mt-8 hover:bg-blue-800 bg-text-[20px] bg-primary-500 w-fit font-mont text-white pt-3 pb-3 pl-6 pr-6 rounded-sm"type="submit">Salvar alterações</button>
             </form>
           
           </>
