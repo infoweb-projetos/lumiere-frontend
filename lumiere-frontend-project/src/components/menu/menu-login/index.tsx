@@ -22,10 +22,11 @@ export const MenuLogin = () => {
 
   return (
     <nav
-      className={`z-20 fixed left-0 top-0 flex w-full min-w-[675px] justify-between border-b ${
+      className={`fixed left-0 top-0 z-20 flex w-screen min-w-[675px] items-center justify-center border-b ${
         activeBorder ? 'border-gray-300' : ''
       } bg-gray-200 pb-4 pl-16 pr-16 pt-4 transition-all`}
     >
+      <div className="flex w-full max-w-[1528px] items-center justify-between">
       <div className="flex w-full flex-row items-center justify-between gap-16 pl-16 pr-16 ">
         <a href="/" className="flex items-center">
           <img className="hidden lg:block" src="/logo-blue-text.svg" alt="" />

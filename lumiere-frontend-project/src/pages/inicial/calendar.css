@@ -1,0 +1,12 @@
+.rs-calendar-table-cell-selected {
+  background-color: #d4d4d4;
+}
+
+.rs-btn {
+  background-color: #2b364f !important;
+  color: white !important;
+}
+
+.rs-btn:hover {
+  background-color: #0d1d37 !important;
+}

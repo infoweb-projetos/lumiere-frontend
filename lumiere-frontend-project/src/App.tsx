@@ -6,8 +6,11 @@ import './index.css';
 import Cadastro from './pages/cadastro';
 import { RequireAuth } from './auth/privateRoute';
 import { Login } from './pages/login';
+import { InitialPage } from './pages/inicial';
+import { PagamentoReuniao } from './pages/pagamento-reunião';
 import { Authteste } from './components/auth';
 import EditarPerfil from './pages/editar-perfil-advogado';
+
 
 function App() {
   return (
@@ -16,16 +19,17 @@ function App() {
       <Route path="/ProcurarAdvogados" element={<ProcurarAdvogados />} />
       <Route path="/ProcurarAdvogados/:id" element={<Individual />} />
       <Route path="/Cadastro" element={<Cadastro />} />
+      <Route path="/Pagamento-Reunião" element={<PagamentoReuniao />} />
       <Route path="/EditarPerfil" element={
                 <RequireAuth>
                 <EditarPerfil />
               </RequireAuth>
       } />
       <Route
-        path="/Authteste"
+        path="/Inicial"
         element={
           <RequireAuth>
-            <Authteste />
+            <InitialPage />
           </RequireAuth>
         }
       />
