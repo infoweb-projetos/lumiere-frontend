@@ -9,7 +9,7 @@ import { GetLawyer } from '../../api/services/advogados/get-lawyers';
 import { useParams } from 'react-router-dom';
 
 export const AdvogadoIndividual = () => {
-  const a = true;
+  const a = false;
   const { id } = useParams();
   const advs = useQuery('advs', GetLawyer);
 
