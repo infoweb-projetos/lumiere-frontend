@@ -9,6 +9,7 @@ export interface Root {
     historico: any
     isAdvogado: boolean
     areaDeAtuacao: any
+    senha: string 
     casos: Caso[]
     categorias: Categoria[]
     reunioes: Reuni[]

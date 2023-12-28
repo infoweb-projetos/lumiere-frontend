@@ -4,7 +4,7 @@ import { useMutation, useQuery } from 'react-query';
 import { MenuLogin } from '../../components/menu/menu-login';
 import { MenuNoLogin } from '../../components/menu/menu-no-login';
 import { DisplayH1 } from '../../components/texts/display-sm/h1';
-import { validationEditarSchema } from './editar.validation';
+import { validationEditarSchemaLaywer, validationEditarSchemaCliente } from './editar.validation';
 import * as React from 'react';
 import { GetLawyer } from '../../api/services/advogados/get-lawyers';
 import { InputEdit } from '../../components/input/input-edit';
@@ -12,28 +12,31 @@ import { Profile, Root } from '../../api/services/user/profile';
 import { ErrorsForm } from '../cadastro/cadastro.interface';
 import { ApiError } from '../../api/auth/singIninterface';
 import { editLawyer, signUpLawyer } from '../../api/services/advogados';
-
-interface PropsAdvsList {
-    id: number;
-    nome: string;
-    email: string;
-    cnpj: string;
-    historico: string  | null;
-    areaDeAtuacao: string | null;
-  } 
-
+import { MontInfo } from '../../components/texts/monteserrat/info';
+import { DisplayH3 } from '../../components/texts/display-sm/h3';
+import { TextAreaEdit } from '../../components/input/textarea-edit';
+import { Footer } from '../../components/footer';
+import * as Toast from '@radix-ui/react-toast';
+import { Label } from '../../components/label';
+import { InputPassword } from '../../components/input/input-password';
+import { InputPasswordEdit } from '../../components/input/input-password-edit';
+import { Button_blue } from '../../components/buttons/button-blue-icon';
+import { ButtonYellow } from '../../components/buttons/button-yellow-icon';
+import { useNavigate } from 'react-router-dom';
+import { editCliente } from '../../api/services/clientes';
 
 export default function EditarPerfil () {
 
     const a = false;
-    const advs = useQuery(['advs'], GetLawyer);
-    const token = localStorage.getItem('token');
+    const navigate = useNavigate();
+
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [passwordConfirm, setPasswordConfirm] = useState('');
     const [cnpj, setCnpj] = useState('');
     const [descricao, setDecricao] = useState('');
+    const [areaatuacao, setAreaAtuacao] = useState('');
+    const [isAdvogado, setisAdvogado] = useState(Boolean);
 
     const [dataUser, setDataUser] = useState<Root | undefined>()
 
@@ -46,39 +49,52 @@ export default function EditarPerfil () {
       email: '',
       password: '',
       name: '',
-      passwordConfirm: '',
+      passwordConfirm: '',     
     });
-
+    
     const mutateProfile = useMutation(Profile, {
       onSuccess: (data) => {
+        console.log(data)
         setDataUser(data)
         setName(data.nome)
+        setEmail(data.email)
+        setDecricao(data.historico)
+        setCnpj(data.cnpj)
+        setPassword(data.senha)
+        setisAdvogado(data.isAdvogado)
       }, onError: () => {
-        console.log('erro')
+        console.log(isAdvogado)
       }
     })
 
-    const signUpLawyerMutation = useMutation(editLawyer, {
+    const editLawyerMutation = useMutation(editLawyer, {
       onSuccess: () => {
       },
       onError: (error: ApiError) => {
         setResponseError(error.response?.data.message || 'Um erro inesperado ocorreu.');
       },
     });
+    const editClientMutation = useMutation(editCliente, {
+      onSuccess: (data) => {
+        console.log("Sucesso na edição do cliente:", data);
+      },
+      onError: (error: ApiError) => {
+        setResponseError(error.response?.data.message || 'Um erro inesperado ocorreu.');
+      },
+      
+    });
 
     useEffect(() => {
-      console.log('opa')
       mutateProfile.mutate()
     },[])
-    
-      const validateForm = async (): Promise<boolean> => {
+    {/*Laywer*/}
+      const validateFormLaywer = async (): Promise<boolean> => {
         try {
-          await validationEditarSchema.validate(
+          await validationEditarSchemaLaywer.validate(
             {
               name: name,
               email: email,
               password: password,
-              passwordConfirm: passwordConfirm,
               cnpj: cnpjMask(cnpj),
               historico: descricao,
             },
@@ -101,20 +117,63 @@ export default function EditarPerfil () {
       };
     
     
-      async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+      async function onSubmitLaywer(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
     
-        const isValid = await validateForm();
+        const isValid = await validateFormLaywer();
     
         if (isValid) {
           console.log(descricao);
-          signUpLawyerMutation.mutate({
+          editLawyerMutation.mutate({
             email: email,
             nome: name,
             cnpj: cnpjMask(cnpj),
             senha: password,
             historico: descricao ? descricao : null,
             areaDeAtuacao: null,
+            isAdvogado: isAdvogado,
+          });
+        }
+      }
+
+      {/*Client*/}
+      const validateFormClient = async (): Promise<boolean> => {
+        try {
+          await validationEditarSchemaCliente.validate(
+            {
+              name: name,
+              email: email,
+            },
+            {
+              abortEarly: false,
+            },
+          );
+        } catch (error) {
+          if (error instanceof Yup.ValidationError) {
+            const validationErrors = error.inner.reduce<ErrorsForm>((errors, err) => {
+              errors[err.path as keyof ErrorsForm] = err.message;
+              return errors;
+            }, {});
+            setValidationFormError(validationErrors);
+          }
+          return false; 
+        }
+        setValidationFormError({});
+        return true;
+      };
+    
+    
+      async function onSubmitClient(e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+    
+        const isValid = await validateFormClient();
+        if (isValid) {
+          console.log("aaaaaa");
+          editClientMutation.mutate({
+            email: email,
+            nome: name,
+            senha: password,
+            isAdvogado: isAdvogado,
           });
         }
       }
@@ -134,22 +193,61 @@ export default function EditarPerfil () {
         <>
         
         {a ? <MenuNoLogin /> : <MenuLogin />}
-        {advs.isFetched &&
-          advs.data &&
-          advs.data.map((adv) => {
-            if (token == adv.id) {
-                setName(adv.nome)
-            }
-            console.log(name)
-          })}
-        <main className='bg-gray-200'>
-          <DisplayH1 className='pl-32 pr-32 pt-24 pb-8'>Meu Perfil</DisplayH1>
-            <div className="bg-blue-300 flex flex-row pl-32 pr-32">
-              <div className='flex flex-row'>
-                <div><img className="-rotate-90 " src="/elizia-advogada.svg" alt=''/></div>
-                <InputEdit className="ml-10" placeholder={name} onChange={setName} erro={false} name="name" value={name} ></InputEdit>
+
+        
+        <main className='bg-gray-200 min-h-screen '>
+        <DisplayH1 className='pl-32 pr-32 pt-24 pb-8 '>Meu perfil</DisplayH1>
+        {isAdvogado ?  
+        <div>
+
+        </div>
+        
+        
+        
+        
+        
+        :
+        <>
+        <form className='bg-blue-300 flex flex-col items-center h-full w-full gap-y-6 p-8' onSubmit={(e) => onSubmitClient(e)}>
+            <div><img className="-rotate-90" src="elizia-advogada.svg"></img></div>
+            <div className='flex flex-col w-1/4'>
+              <label className="font-dm text-white text-2xl">Nome completo</label>
+              <InputEdit className=" h-10 rounded border-[1px] border-2 border-white text-base text-black bg-white" name="name" placeholder={name} onChange={setName} value={name} erro={false}></InputEdit>
+              <MontInfo className="text-semantic-red">{validationFormError.name}</MontInfo>
             </div>
-          </div>
+            <div className='flex flex-col w-1/4'>
+              <label className="font-dm text-white text-2xl">Email</label>
+              <InputEdit className="h-10 rounded border-[1px] border-2 border-white text-base bg-white text-black" name="email" placeholder={email} onChange={setEmail} value={email} erro={false}></InputEdit>
+              <MontInfo className="text-semantic-red">{validationFormError.email}</MontInfo>
+            </div>
+            <div className='flex flex-col w-1/4'>
+              <label className="font-dm text-white text-2xl">Senha</label>
+              <InputPasswordEdit
+                value={password}
+                onChange={setPassword}
+                erro={false}
+                placeholder={password}
+                name="password"
+              />
+              <MontInfo className="text-semantic-red">{validationFormError.password}</MontInfo>
+            </div>
+              <button className="hover:bg-blue-800 bg-text-[20px] bg-primary-500 w-fit font-mont text-white pt-3 pb-3 pl-6 pr-6 rounded-sm"type="submit">Salvar alterações</button>
+            </form>
+          
+          </>
+          }
+
+        {/*Toast*/}
+        <Toast.Provider swipeDirection="right">
+          <Toast.Title className="mb-[5px] font-mont text-[15px] font-bold text-gray-200 [grid-area:_title]">
+            Infelizmente ocorreu um erro.
+          </Toast.Title>
+          <Toast.Description asChild>
+            <MontInfo className="text-[12px] text-white/80">{responseError}</MontInfo>
+          </Toast.Description>
+        <Toast.Viewport className="fixed bottom-0 right-0 z-[2147483647] m-0 flex w-[390px] max-w-[100vw] list-none flex-col gap-[10px] p-[var(--viewport-padding)] outline-none [--viewport-padding:_25px]" />
+      </Toast.Provider>
+          <Footer />
         </main>
         
         </>

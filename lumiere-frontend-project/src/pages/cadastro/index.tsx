@@ -147,6 +147,7 @@ const Cadastro = () => {
         senha: password,
         historico: descricao ? descricao : null,
         areaDeAtuacao: null,
+        isAdvogado: choise,
       });
     }
   }
