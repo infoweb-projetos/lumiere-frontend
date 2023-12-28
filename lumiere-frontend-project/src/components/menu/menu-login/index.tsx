@@ -1,10 +1,12 @@
 import { User } from '@phosphor-icons/react';
 import { useEffect, useState } from 'react';
 import { LinkUnderline } from '../../link/link-underline';
+import { useNavigate } from 'react-router-dom';
 
 export const MenuLogin = () => {
   const [activeBorder, setActiveBorder] = useState(false);
-
+  const navigate = useNavigate();
+  
   //Colocar bordar quando scrolly for maior que 10px
   useEffect(() => {
     function posicaoScroll() {
@@ -39,10 +41,6 @@ export const MenuLogin = () => {
             <LinkUnderline text="Encontrar Advogados" href="/ProcurarAdvogados" />
           </li>
 
-          <li>
-            {' '}
-            <LinkUnderline text="Batepapo" href="/Casos" />
-          </li>
 
           <li className='group relative inline-block hover:block'>
               <User
@@ -52,7 +50,11 @@ export const MenuLogin = () => {
               />
               <div className='group-hover:block hidden absolute bg-white p-4 w-[150px]'>
                 <a href="/EditarPerfil" className='block mb-10 '>Editar Perfil</a>
-                <a href="#" className='block'>Logout</a>
+                <a onClick={() => {
+          localStorage.removeItem('token');
+          navigate('/');
+          
+        }}href="#" className='block'>Logout</a>
             </div>
           </li>
         </ul>

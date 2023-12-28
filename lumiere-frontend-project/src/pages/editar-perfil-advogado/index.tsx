@@ -198,9 +198,63 @@ export default function EditarPerfil () {
         <main className='bg-gray-200 min-h-screen '>
         <DisplayH1 className='pl-32 pr-32 pt-24 pb-8 '>Meu perfil</DisplayH1>
         {isAdvogado ?  
-        <div>
-
+        <form className='pl-48 pr-48 bg-blue-300 flex flex-col items-center h-full w-full gap-y-6 p-8' onSubmit={(e) => onSubmitLaywer(e)}>
+        <div className='flex flex-row w-1/2 h-1/2'>
+          <div ><img className="h-5/4 -rotate-90" src="elizia-advogada.svg"></img></div>
+          <div className='flex flex-col w-full ml-10 mt-4'>
+            <div className='w-full flex flex-col'>
+              <label className="font-dm text-white text-2xl">Nome completo</label>
+              <InputEdit className=" h-10 rounded border-[1px] border-2 border-white text-base text-black bg-white" name="name" placeholder={name} onChange={setName} value={name} erro={false}></InputEdit>
+              <MontInfo className="text-semantic-red">{validationFormError.name}</MontInfo>
+            </div>
+            <div className='w-full flex flex-col'>
+              <label className="font-dm text-white text-2xl">Histórico de atuação</label>
+              <TextAreaEdit className=" h-32 rounded border-[1px] border-2 border-white text-base text-black bg-white" name="descricao" placeholder={descricao} onChange={setDecricao} value={descricao} erro={false}></TextAreaEdit>
+              <MontInfo className="text-semantic-red">{validationFormError.name}</MontInfo>
+            </div>
+          </div>
+          
         </div>
+        <div className='flex flex-row w-1/2 h-1/2 gap-x-8'>
+        <div className='flex flex-col w-full h-1/2'>
+          <div className='flex flex-col w-full'>
+            <label className="font-dm text-white text-2xl">Email</label>
+            <InputEdit className="h-10 rounded border-[1px] border-2 border-white text-base bg-white text-black" name="email" placeholder={email} onChange={setEmail} value={email} erro={false}></InputEdit>
+            <MontInfo className="text-semantic-red">{validationFormError.email}</MontInfo>
+          </div>
+          <div className='flex flex-col w-full'>
+            <label className="font-dm text-white text-2xl">Senha</label>
+            <InputPasswordEdit
+              value={password}
+              onChange={setPassword}
+              erro={false}
+              placeholder={password}
+              name="password"
+            />
+            <MontInfo className="text-semantic-red">{validationFormError.password}</MontInfo>
+          </div>
+        </div>
+        <div className='flex flex-col w-full h-1/2'>
+          <div className='flex flex-col '>
+            <label className="font-dm text-white text-2xl">Email</label>
+            <InputEdit className="h-10 rounded border-[1px] border-2 border-white text-base bg-white text-black" name="email" placeholder={email} onChange={setEmail} value={email} erro={false}></InputEdit>
+            <MontInfo className="text-semantic-red">{validationFormError.email}</MontInfo>
+          </div>
+          <div className='flex flex-col w-full'>
+            <label className="font-dm text-white text-2xl">Senha</label>
+            <InputPasswordEdit
+              value={password}
+              onChange={setPassword}
+              erro={false}
+              placeholder={password}
+              name="password"
+            />
+            <MontInfo className="text-semantic-red">{validationFormError.password}</MontInfo>
+          </div>
+        </div>
+      </div>
+          <button className=" mt-8 hover:bg-blue-800 bg-text-[20px] bg-primary-500 w-fit font-mont text-white pt-3 pb-3 pl-6 pr-6 rounded-sm"type="submit">Salvar alterações</button>
+        </form>
         
         
         
