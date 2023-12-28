@@ -7,6 +7,6 @@ export interface SignInParams {
 }
 
 export interface SignInResponse {
-  accessToken: string;
+  access_token: string;
 }
 export type ApiError = AxiosError<UnauthorizedError>;

@@ -7,6 +7,7 @@ import Cadastro from './pages/cadastro';
 import { RequireAuth } from './auth/privateRoute';
 import { Login } from './pages/login';
 import { Authteste } from './components/auth';
+import EditarPerfil from './pages/editar-perfil-advogado';
 
 function App() {
   return (
@@ -15,6 +16,11 @@ function App() {
       <Route path="/ProcurarAdvogados" element={<ProcurarAdvogados />} />
       <Route path="/ProcurarAdvogados/:id" element={<Individual />} />
       <Route path="/Cadastro" element={<Cadastro />} />
+      <Route path="/EditarPerfil" element={
+                <RequireAuth>
+                <EditarPerfil />
+              </RequireAuth>
+      } />
       <Route
         path="/Authteste"
         element={

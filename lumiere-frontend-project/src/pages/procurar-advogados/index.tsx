@@ -7,7 +7,7 @@ import { CardProcurarAdvogados } from '../../components/cards/card-procurar-advo
 import { useQuery } from 'react-query';
 import { GetLawyer } from '../../api/services/advogados/get-lawyers';
 import { ResponseLawyer } from '../../api/services/advogados/get-lawyers/get-lawyer.interface';
-const a = true;
+const a = false;
 
 interface PropsOptions {
   value: string;

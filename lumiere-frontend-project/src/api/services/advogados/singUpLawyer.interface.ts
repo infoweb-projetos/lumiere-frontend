@@ -6,6 +6,8 @@ export interface SignUpLawyer {
   historico: string | null;
   nome: string;
   areaDeAtuacao: null;
+  isAdvogado: boolean | null;
+  
 }
 
 export interface SignUpLawyerResponse {
