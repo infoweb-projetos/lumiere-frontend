@@ -2,8 +2,6 @@ import { MontP } from '../../components/texts/monteserrat/p';
 import { DisplayH1 } from '../../components/texts/display-sm/h1';
 import { CardAmarelo } from '../../components/cards/card-menu-amarelo';
 import { CardMenuBottom } from '../../components/cards/card-menu-foto-bottom';
-import { MenuLogin } from '../../components/menu/menu-login';
-import { MenuNoLogin } from '../../components/menu/menu-no-login';
 import { Button_ghost_dark } from '../../components/buttons/button-ghost-dark';
 import { Footer } from '../../components/footer';
 import { useQuery } from 'react-query';
@@ -12,6 +10,7 @@ import { ResponseLawyer } from '../../api/services/advogados/get-lawyers/get-law
 import { ArrowDown } from '@phosphor-icons/react';
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Menu } from '@/components/menu/menu';
 
 export default function HomePage() {
   const a = true;
@@ -29,8 +28,7 @@ export default function HomePage() {
 
   return (
     <>
-      {a ? <MenuNoLogin /> : <MenuLogin />}
-
+      <Menu />
       <main className=" flex w-full flex-col items-center scroll-smooth bg-gray-200 pb-4 pt-24">
         <div className=" flex h-[75vh] w-full max-w-[1528px] flex-row items-center justify-center gap-12 p-12 lg:justify-between 2xl:p-0">
           <div className="flex flex-col justify-center ">

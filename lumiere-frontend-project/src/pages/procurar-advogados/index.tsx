@@ -1,13 +1,11 @@
 import { useState, useEffect } from 'react';
 import { DisplayH1 } from '../../components/texts/display-sm/h1';
-import { MenuLogin } from '../../components/menu/menu-login';
-import { MenuNoLogin } from '../../components/menu/menu-no-login';
 import { Footer } from '../../components/footer';
 import { CardProcurarAdvogados } from '../../components/cards/card-procurar-advogados';
 import { useQuery } from 'react-query';
 import { GetLawyer } from '../../api/services/advogados/get-lawyers';
 import { ResponseLawyer } from '../../api/services/advogados/get-lawyers/get-lawyer.interface';
-const a = false;
+import { Menu } from '@/components/menu/menu';
 
 interface PropsOptions {
   value: string;
@@ -41,7 +39,7 @@ export default function ProcurarAdvogados() {
   //   const selectedOptions = filtro_select?.values ?? [];
   return (
     <>
-      {a ? <MenuNoLogin /> : <MenuLogin />}
+      <Menu />
       <main className="flex min-h-screen w-full flex-col items-center gap-6 bg-gray-200 pb-4 pl-16 pr-16 pt-24">
         <div className="flex w-full max-w-[1528px] flex-col items-center  gap-6">
           <div className="w-fit">

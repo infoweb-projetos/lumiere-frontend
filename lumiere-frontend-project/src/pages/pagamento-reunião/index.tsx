@@ -1,4 +1,3 @@
-import { MenuLogin } from '@/components/menu/menu-login';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { BallAlert } from '@/components/ball-alert';
 import { useEffect, useState } from 'react';
@@ -13,6 +12,7 @@ import { Dialog } from '@/components/dialog/dialog-edit-payment';
 import { Skeleton } from '@/components/ui/skeleton';
 import { GetMeeting, GetMeets } from '@/api/services/meeting/get-meeting';
 import { MontInfo } from '@/components/texts/monteserrat/info';
+import { Menu } from '@/components/menu/menu';
 
 export const PagamentoReuniao = () => {
   const [payments, setPayments] = useState<Payment[] | undefined>();
@@ -28,7 +28,6 @@ export const PagamentoReuniao = () => {
 
   const mutateReuniao = useMutation(GetMeeting, {
     onSuccess: (data) => {
-      console.log(data);
       setMeetings(data);
     },
   });
@@ -47,7 +46,7 @@ export const PagamentoReuniao = () => {
 
   return (
     <>
-      <MenuLogin />
+      <Menu />
       <main className="flex min-h-screen w-full flex-col items-center gap-6 bg-gray-200 pb-4 pl-16 pr-16 pt-24">
         <div className="flex w-full max-w-[1528px] flex-col items-center  gap-6">
           <Tabs defaultValue="pagamentos" className="w-full">
@@ -70,20 +69,20 @@ export const PagamentoReuniao = () => {
             </TabsList>
             <TabsContent value="pagamentos">
               {mutatePayment.isLoading ? (
-                <div className="flex flex-wrap gap-2">
-                  <Skeleton className="h-[350px] w-[400px] rounded" />
-                  <Skeleton className="h-[350px] w-[400px] rounded" />
-                  <Skeleton className="h-[350px] w-[400px] rounded" />
-                  <Skeleton className="h-[350px] w-[400px] rounded" />
+                <div className="grid w-full grid-cols-[1fr_1fr_1fr] gap-2">
+                  <Skeleton className="h-[350px] w-full rounded" />
+                  <Skeleton className="h-[350px] w-full rounded" />
+                  <Skeleton className="h-[350px] w-full rounded" />
+                  <Skeleton className="h-[350px] w-full rounded" />
                 </div>
               ) : (
                 <div
-                  className="flex w-full gap-2
+                  className="grid w-full grid-cols-[1fr_1fr_1fr] gap-2
               "
                 >
                   {payments &&
                     payments.map((payment) => (
-                      <Card className="flex h-[350px] w-[400px] flex-col justify-between rounded" key={payment.id}>
+                      <Card className="flex h-[350px] w-full flex-col justify-between rounded" key={payment.id}>
                         <div>
                           <CardHeader>
                             <CardTitle>
@@ -106,7 +105,7 @@ export const PagamentoReuniao = () => {
                         </div>
 
                         <CardFooter>
-                          {!user?.isAdvogado && (
+                          {user?.isAdvogado && (
                             <MontP>
                               {payment.pago ? (
                                 <div className="flex items-center gap-2">
@@ -121,13 +120,13 @@ export const PagamentoReuniao = () => {
                               )}
                             </MontP>
                           )}
-                          {user?.isAdvogado && payment.pago ? (
+                          {!user?.isAdvogado && payment.pago ? (
                             <>
                               <MontP className="mr-2">Pagamento realizado</MontP>
                               <Checks size={32} className="text-blue-800" />
                             </>
                           ) : (
-                            user?.isAdvogado &&
+                            !user?.isAdvogado &&
                             !payment.pago && (
                               <Dialog refetchPayment={mutatePayment.mutate} value={payment.quantia} id={payment.id} />
                             )
@@ -140,20 +139,20 @@ export const PagamentoReuniao = () => {
             </TabsContent>
             <TabsContent value="reunioes">
               {mutateReuniao.isLoading ? (
-                <div className="flex flex-wrap gap-2">
-                  <Skeleton className="h-[300px] w-[600px] rounded" />
-                  <Skeleton className="h-[300px] w-[600px] rounded" />
-                  <Skeleton className="h-[300px] w-[600px] rounded" />
-                  <Skeleton className="h-[300px] w-[600px] rounded" />
+                <div className="grid w-full grid-cols-[1fr_1fr] gap-2">
+                  <Skeleton className="h-[300px] w-full rounded" />
+                  <Skeleton className="h-[300px] w-full rounded" />
+                  <Skeleton className="h-[300px] w-full rounded" />
+                  <Skeleton className="h-[300px] w-full rounded" />
                 </div>
               ) : (
                 <div
-                  className="flex w-full gap-2
+                  className="grid w-full grid-cols-[1fr_1fr] gap-2
               "
                 >
                   {meetings &&
                     meetings.map((meet) => (
-                      <Card className="flex h-[350px] w-[600px] flex-col justify-between rounded" key={meet.id}>
+                      <Card className="flex h-[350px] w-full flex-col justify-between rounded" key={meet.id}>
                         <div>
                           <CardHeader>
                             <CardTitle>

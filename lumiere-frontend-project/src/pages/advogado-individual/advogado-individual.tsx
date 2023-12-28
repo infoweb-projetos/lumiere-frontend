@@ -1,21 +1,19 @@
 import { MontH2 } from '../../components/texts/monteserrat/h2';
-import { MenuLogin } from '../../components/menu/menu-login';
-import { MenuNoLogin } from '../../components/menu/menu-no-login';
 import { Footer } from '../../components/footer';
 import { CardPageAdvogadoIndividual } from '../../components/cards/card-page-advogado-individual';
 import { Comentario } from '../../components/cards/comentario';
 import { useQuery } from 'react-query';
 import { GetLawyer } from '../../api/services/advogados/get-lawyers';
 import { useParams } from 'react-router-dom';
+import { Menu } from '@/components/menu/menu';
 
 export const AdvogadoIndividual = () => {
-  const a = false;
   const { id } = useParams();
   const advs = useQuery('advs', GetLawyer);
 
   return (
     <>
-      {a ? <MenuNoLogin /> : <MenuLogin />}
+      <Menu />
       <div className="flex flex-row">
         {advs.isFetched &&
           id &&
