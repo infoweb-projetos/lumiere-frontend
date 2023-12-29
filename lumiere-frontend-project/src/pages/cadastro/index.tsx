@@ -18,12 +18,13 @@ import * as Switch from '@radix-ui/react-switch';
 import * as React from 'react';
 import * as Toast from '@radix-ui/react-toast';
 import { useNavigate } from 'react-router-dom';
+import { signUpCliente } from '@/api/services/clientes/post-user';
 
 const Cadastro = () => {
   const [fase, setFase] = useState(1);
   const [open, setOpen] = React.useState(false);
   const timerRef = React.useRef(0);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -48,9 +49,22 @@ const Cadastro = () => {
     cnpj: '',
   });
 
+  const signUpClient = useMutation(signUpCliente, {
+    onSuccess: () => {
+      navigate('/login');
+    },
+    onError: (error: ApiError) => {
+      window.clearTimeout(timerRef.current);
+      timerRef.current = window.setTimeout(() => {
+        setOpen(true);
+      }, 100);
+      setResponseError(error.response?.data.message || 'Um erro inesperado ocorreu.');
+    },
+  });
+
   const signUpLawyerMutation = useMutation(signUpLawyer, {
     onSuccess: () => {
-      navigate('/')
+      navigate('/');
     },
     onError: (error: ApiError) => {
       window.clearTimeout(timerRef.current);
@@ -129,7 +143,11 @@ const Cadastro = () => {
     const isValid = await validateFormFirst();
 
     if (isValid) {
-      console.log('ok');
+      signUpClient.mutate({
+        nome: name,
+        email,
+        senha: password,
+      });
     }
   }
 
@@ -147,6 +165,7 @@ const Cadastro = () => {
         senha: password,
         historico: descricao ? descricao : null,
         areaDeAtuacao: null,
+        isAdvogado: choise,
       });
     }
   }

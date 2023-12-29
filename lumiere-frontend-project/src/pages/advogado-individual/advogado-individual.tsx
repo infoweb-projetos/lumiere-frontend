@@ -1,21 +1,20 @@
 import { MontH2 } from '../../components/texts/monteserrat/h2';
-import { MenuLogin } from '../../components/menu/menu-login';
-import { MenuNoLogin } from '../../components/menu/menu-no-login';
 import { Footer } from '../../components/footer';
 import { CardPageAdvogadoIndividual } from '../../components/cards/card-page-advogado-individual';
 import { Comentario } from '../../components/cards/comentario';
 import { useQuery } from 'react-query';
 import { GetLawyer } from '../../api/services/advogados/get-lawyers';
 import { useParams } from 'react-router-dom';
+import { Menu } from '@/components/menu/menu';
 
 export const AdvogadoIndividual = () => {
-  const a = true;
   const { id } = useParams();
   const advs = useQuery('advs', GetLawyer);
+  console.log(advs);
 
   return (
     <>
-      {a ? <MenuNoLogin /> : <MenuLogin />}
+      <Menu />
       <div className="flex flex-row">
         {advs.isFetched &&
           id &&
@@ -25,11 +24,11 @@ export const AdvogadoIndividual = () => {
               return (
                 <CardPageAdvogadoIndividual
                   key={id}
-                  referencia={'null'}
                   name={adv.nome}
-                  description={'Advogado muito top'}
-                  rating={'4'}
-                  photourl={'/elizia-advogada.svg'}
+                  description={adv.historico}
+                  photourl={'/michael-s.svg'}
+                  casos={adv.casos.length}
+                  categories={adv.categorias}
                 />
               );
             }

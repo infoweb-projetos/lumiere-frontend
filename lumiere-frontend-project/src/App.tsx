@@ -2,11 +2,17 @@ import { Route, Routes } from 'react-router-dom';
 import ProcurarAdvogados from '../src/pages/procurar-advogados/';
 import Individual from '../src/components/cards/individual/';
 import HomePage from '../src/pages/homepage/';
-import './index.css';
 import Cadastro from './pages/cadastro';
 import { RequireAuth } from './auth/privateRoute';
 import { Login } from './pages/login';
-import { Authteste } from './components/auth';
+import { InitialPage } from './pages/inicial';
+import EditarPerfil from './pages/editar-perfil-advogado';
+
+import './index.css';
+import { CreateMeet } from './pages/criar-reuniao';
+import { DetalhamentoCaso } from './pages/pagamento-reunião';
+import CasoAdvogado from './pages/caso-advogado';
+import CriarCaso from './pages/criar-caso';
 
 function App() {
   return (
@@ -15,11 +21,45 @@ function App() {
       <Route path="/ProcurarAdvogados" element={<ProcurarAdvogados />} />
       <Route path="/ProcurarAdvogados/:id" element={<Individual />} />
       <Route path="/Cadastro" element={<Cadastro />} />
+      <Route path="/Casos" element={<CasoAdvogado />} />
       <Route
-        path="/Authteste"
+        path="/Casos/:id"
         element={
           <RequireAuth>
-            <Authteste />
+            <DetalhamentoCaso />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/Criar-Caso"
+        element={
+          <RequireAuth>
+            <CriarCaso />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/EditarPerfil"
+        element={
+          <RequireAuth>
+            <EditarPerfil />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/Inicial"
+        element={
+          <RequireAuth>
+            <InitialPage />
+          </RequireAuth>
+        }
+      />
+
+      <Route
+        path="/Criar-Reuniao/:id"
+        element={
+          <RequireAuth>
+            <CreateMeet />
           </RequireAuth>
         }
       />
