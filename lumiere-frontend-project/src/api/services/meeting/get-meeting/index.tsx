@@ -1,5 +1,4 @@
 import axiosInstance from '@/api/axiosinstance';
-import { Meeting } from '../../user/me';
 
 export interface GetMeets {
   atualizadoEm: string;

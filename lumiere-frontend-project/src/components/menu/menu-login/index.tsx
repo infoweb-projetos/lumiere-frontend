@@ -37,9 +37,6 @@ export const MenuLogin = () => {
               <LinkUnderline text="Casos" href="/Casos" />
             </li>
             <li>
-              <LinkUnderline text="Reuniões e Pagamentos" href="/Pagamento-Reunião" />
-            </li>
-            <li>
               <LinkUnderline text="Encontrar Advogados" href="/ProcurarAdvogados" />
             </li>
 
@@ -49,7 +46,7 @@ export const MenuLogin = () => {
                 size={44}
                 className="rounded bg-secondary-500 p-2 text-secondary-800 transition-all hover:brightness-[105%]"
               />
-              <div className="absolute hidden w-[180px] flex-col gap-4 rounded bg-white p-4 group-hover:flex">
+              <div className="absolute right-0 hidden w-[180px] flex-col gap-4 rounded border border-gray-200 bg-white p-4 group-hover:flex">
                 <a
                   href="/EditarPerfil"
                   className="flex items-center gap-2 text-gray-800 no-underline hover:text-gray-800/80"

@@ -1,5 +1,5 @@
 import { IButtonProps } from '../button.interface';
-export const Button_blue = ({ size, title, type = 'button', func, className }: IButtonProps) => {
+export const Button_blue = ({ size, title, type = 'button', referencia, func, className }: IButtonProps) => {
   const handClick = () => {
     if (func) {
       void func();
@@ -8,26 +8,42 @@ export const Button_blue = ({ size, title, type = 'button', func, className }: I
 
   return (
     <>
-      {size === 'sm' ? (
+      {size === 'sm' && referencia === undefined ? (
         <button
-          className={`flex h-11 items-center justify-center rounded bg-primary-500 px-8 font-mont text-sm font-semibold text-gray-200 transition-all hover:bg-blue-800 active:bg-primary-500 ${
-            className ? className : ''
-          }`}
+          className={`${className!} flex h-11 w-fit items-center justify-center rounded bg-primary-500 px-8 py-4 font-mont text-sm font-semibold text-gray-200 transition-all hover:bg-blue-600 active:bg-primary-500`}
           type={type}
           onClick={handClick}
         >
           {title}
         </button>
-      ) : size === 'xl' ? (
+      ) : size === 'xl' && referencia === undefined ? (
         <button
-          className="rounded bg-primary-800 px-8 py-4 font-mont text-xl font-semibold text-gray-200 transition-all hover:bg-blue-800 active:bg-primary-500"
+          className={`${className!} rounded bg-primary-500 px-8 py-4 font-mont text-xl font-semibold text-gray-200 transition-all hover:bg-blue-600 active:bg-primary-500`}
           type={type}
           onClick={handClick}
         >
           {title}
         </button>
+      ) : size === 'sm' && referencia ? (
+        <a href={referencia} style={{ textDecoration: 'none' }}>
+          <button
+            className={`${className!} flex h-11 w-fit items-center justify-center rounded bg-primary-500 px-8 py-4 font-mont text-sm font-semibold text-gray-200 transition-all hover:bg-blue-600 active:bg-primary-500`}
+            type={type}
+          >
+            {title}
+          </button>
+        </a>
+      ) : size === 'xl' && referencia ? (
+        <a href={referencia} style={{ textDecoration: 'none' }}>
+          <button
+            className={`${className!} rounded bg-primary-500 px-8 py-4 font-mont text-xl font-semibold text-gray-200 transition-all hover:bg-blue-600 active:bg-primary-500`}
+            type={type}
+          >
+            {title}
+          </button>
+        </a>
       ) : (
-        <p className="text-sm">Esse tamanho não existe</p>
+        <div>Não existe</div>
       )}
     </>
   );
