@@ -10,6 +10,7 @@ import { Menu } from '@/components/menu/menu';
 export const AdvogadoIndividual = () => {
   const { id } = useParams();
   const advs = useQuery('advs', GetLawyer);
+  console.log(advs);
 
   return (
     <>
@@ -23,11 +24,11 @@ export const AdvogadoIndividual = () => {
               return (
                 <CardPageAdvogadoIndividual
                   key={id}
-                  referencia={'null'}
                   name={adv.nome}
-                  description={'Advogado muito top'}
-                  rating={'4'}
-                  photourl={'/elizia-advogada.svg'}
+                  description={adv.historico}
+                  photourl={'/michael-s.svg'}
+                  casos={adv.casos.length}
+                  categories={adv.categorias}
                 />
               );
             }

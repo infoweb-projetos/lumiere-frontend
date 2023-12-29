@@ -6,6 +6,8 @@ import { useQuery } from 'react-query';
 import { GetLawyer } from '../../api/services/advogados/get-lawyers';
 import { ResponseLawyer } from '../../api/services/advogados/get-lawyers/get-lawyer.interface';
 import { Menu } from '@/components/menu/menu';
+import { Skeleton } from '@/components/ui/skeleton';
+import { MagnifyingGlass } from '@phosphor-icons/react';
 
 interface PropsOptions {
   value: string;
@@ -35,19 +37,18 @@ export default function ProcurarAdvogados() {
     adv.nome.toLowerCase().includes(search.toLowerCase()),
   );
 
-  //   const [filtro_select, setFiltroSelect] = useState<MultiValue<PropsOptions>>();
-  //   const selectedOptions = filtro_select?.values ?? [];
   return (
     <>
       <Menu />
-      <main className="flex min-h-screen w-full flex-col items-center gap-6 bg-gray-200 pb-4 pl-16 pr-16 pt-24">
-        <div className="flex w-full max-w-[1528px] flex-col items-center  gap-6">
-          <div className="w-fit">
-            <DisplayH1>Procurar advogados</DisplayH1>
+      <main className="flex min-h-screen w-full flex-col items-center gap-4 bg-gray-200 pb-4 pl-16 pr-16 pt-24">
+        <div className="flex w-full max-w-[1528px] flex-col items-center  gap-4">
+          <div className="w-full">
+            <DisplayH1>Encontrar advogados</DisplayH1>
           </div>
-          <div className=" flex w-full flex-row justify-center rounded border-2 border-gray-50 p-6">
+          <div className="flex w-full items-center gap-4">
+            <MagnifyingGlass size={32} weight="fill" />
             <input
-              className="w-2/4 rounded pb-5 pl-10 pr-10 pt-5 font-mont"
+              className="w-full rounded pb-5 pl-10 pr-10 pt-5 font-mont"
               placeholder="Pesquisar advogado por nome"
               type="search"
               value={search}
@@ -55,20 +56,28 @@ export default function ProcurarAdvogados() {
             />
           </div>
         </div>
-
-        <div className="grid w-full max-w-[1528px] grid-cols-2  gap-6">
-          {filtro_barra?.map((adv: ResponseLawyer) => (
-            <CardProcurarAdvogados
-              key={adv.id}
-              name={adv.nome}
-              description="Advogado muito top"
-              rating="4"
-              photourl="/michael-s.svg"
-              referencia={'ProcurarAdvogados/' + adv.id}
-            />
-          ))}
-        </div>
-        <Footer />
+        {advs.isLoading ? (
+          <div className="grid w-full max-w-[1528px] grid-cols-2  gap-4">
+            <Skeleton className="h-[350px] w-full" />
+            <Skeleton className="h-[350px] w-full" />
+            <Skeleton className="h-[350px] w-full" />
+          </div>
+        ) : (
+          advs.isFetched && (
+            <div className="grid w-full max-w-[1528px] grid-cols-2  gap-4">
+              {filtro_barra?.map((adv: ResponseLawyer) => (
+                <CardProcurarAdvogados
+                  key={adv.id}
+                  name={adv.nome}
+                  description="Advogado muito top"
+                  rating="4"
+                  photourl="/michael-s.svg"
+                  referencia={'ProcurarAdvogados/' + adv.id}
+                />
+              ))}
+            </div>
+          )
+        )}
       </main>
     </>
   );

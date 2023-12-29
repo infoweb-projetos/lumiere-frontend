@@ -179,7 +179,7 @@ export default function EditarPerfil() {
       <Menu />
 
       <main className="min-h-screen bg-gray-200 ">
-        <DisplayH1 className="pb-8 pl-32 pr-32 pt-24 ">Meu perfil</DisplayH1>
+        <DisplayH1 className="pb-8 pl-32 pr-32 ">Meu perfil</DisplayH1>
         {isAdvogado ? (
           <form
             className="flex h-full w-full flex-col items-center gap-y-6 bg-blue-300 p-8 pb-32 pl-48 pr-48 pt-32"

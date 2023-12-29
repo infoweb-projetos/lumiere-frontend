@@ -1,4 +1,4 @@
-import { User } from '@phosphor-icons/react';
+import { Person, SignOut, User } from '@phosphor-icons/react';
 import { useEffect, useState } from 'react';
 import { LinkUnderline } from '../../link/link-underline';
 import { useNavigate } from 'react-router-dom';
@@ -27,22 +27,19 @@ export const MenuLogin = () => {
       } bg-gray-200 pb-4 pl-16 pr-16 pt-4 transition-all`}
     >
       <div className="flex w-full max-w-[1528px] items-center justify-between">
-        <div className="flex w-full flex-row items-center justify-between gap-16 pl-16 pr-16 ">
+        <div className="flex w-full flex-row items-center justify-between gap-16 ">
           <a href="/" className="flex items-center">
             <img className="hidden lg:block" src="/logo-blue-text.svg" alt="" />
             <img className="lg:hidden" src="/logo-blue-al.svg" alt="" />
           </a>
           <ul className="flex items-center gap-8 font-mont text-base text-gray-800">
             <li>
-              {' '}
               <LinkUnderline text="Casos" href="/Casos" />
             </li>
             <li>
-              {' '}
               <LinkUnderline text="Reuniões e Pagamentos" href="/Pagamento-Reunião" />
             </li>
             <li>
-              {' '}
               <LinkUnderline text="Encontrar Advogados" href="/ProcurarAdvogados" />
             </li>
 
@@ -52,8 +49,13 @@ export const MenuLogin = () => {
                 size={44}
                 className="rounded bg-secondary-500 p-2 text-secondary-800 transition-all hover:brightness-[105%]"
               />
-              <div className="absolute hidden w-[150px] bg-white p-4 group-hover:block">
-                <a href="/EditarPerfil" className="mb-10 block ">
+              <div className="absolute hidden w-[180px] flex-col gap-4 rounded bg-white p-4 group-hover:flex">
+                <a
+                  href="/EditarPerfil"
+                  className="flex items-center gap-2 text-gray-800 no-underline hover:text-gray-800/80"
+                  style={{ textDecoration: 'none' }}
+                >
+                  <Person weight="fill" />
                   Editar Perfil
                 </a>
                 <a
@@ -62,8 +64,10 @@ export const MenuLogin = () => {
                     navigate('/');
                   }}
                   href="#"
-                  className="block"
+                  className=" flex items-center gap-2 text-gray-800 no-underline hover:text-gray-800/80"
+                  style={{ textDecoration: 'none' }}
                 >
+                  <SignOut weight="fill" />
                   Logout
                 </a>
               </div>

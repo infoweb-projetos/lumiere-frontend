@@ -13,6 +13,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { GetMeeting, GetMeets } from '@/api/services/meeting/get-meeting';
 import { MontInfo } from '@/components/texts/monteserrat/info';
 import { Menu } from '@/components/menu/menu';
+import { DisplayH1 } from '@/components/texts/display-sm/h1';
 
 export const PagamentoReuniao = () => {
   const [payments, setPayments] = useState<Payment[] | undefined>();
@@ -49,8 +50,12 @@ export const PagamentoReuniao = () => {
       <Menu />
       <main className="flex min-h-screen w-full flex-col items-center gap-6 bg-gray-200 pb-4 pl-16 pr-16 pt-24">
         <div className="flex w-full max-w-[1528px] flex-col items-center  gap-6">
+          <div className="w-full">
+            <DisplayH1>Reuniões e Pagamentos</DisplayH1>
+          </div>
+
           <Tabs defaultValue="pagamentos" className="w-full">
-            <TabsList className=" rounded bg-gray-400/10 p-0">
+            <TabsList className=" mb-2 rounded bg-gray-400/10">
               <TabsTrigger value="pagamentos">
                 <>
                   Pagamentos
@@ -69,7 +74,7 @@ export const PagamentoReuniao = () => {
             </TabsList>
             <TabsContent value="pagamentos">
               {mutatePayment.isLoading ? (
-                <div className="grid w-full grid-cols-[1fr_1fr_1fr] gap-2">
+                <div className="grid w-full grid-cols-[1fr_1fr_1fr] gap-4">
                   <Skeleton className="h-[350px] w-full rounded" />
                   <Skeleton className="h-[350px] w-full rounded" />
                   <Skeleton className="h-[350px] w-full rounded" />
@@ -77,7 +82,7 @@ export const PagamentoReuniao = () => {
                 </div>
               ) : (
                 <div
-                  className="grid w-full grid-cols-[1fr_1fr_1fr] gap-2
+                  className="grid w-full grid-cols-[1fr_1fr_1fr] gap-4
               "
                 >
                   {payments &&

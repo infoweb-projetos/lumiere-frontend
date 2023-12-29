@@ -10,6 +10,7 @@ import { PagamentoReuniao } from './pages/pagamento-reunião';
 import EditarPerfil from './pages/editar-perfil-advogado';
 
 import './index.css';
+import { CreateMeet } from './pages/criar-reuniao';
 
 function App() {
   return (
@@ -18,7 +19,14 @@ function App() {
       <Route path="/ProcurarAdvogados" element={<ProcurarAdvogados />} />
       <Route path="/ProcurarAdvogados/:id" element={<Individual />} />
       <Route path="/Cadastro" element={<Cadastro />} />
-      <Route path="/Pagamento-Reunião" element={<PagamentoReuniao />} />
+      <Route
+        path="/Pagamento-Reunião"
+        element={
+          <RequireAuth>
+            <PagamentoReuniao />
+          </RequireAuth>
+        }
+      />
       <Route
         path="/EditarPerfil"
         element={
@@ -32,6 +40,15 @@ function App() {
         element={
           <RequireAuth>
             <InitialPage />
+          </RequireAuth>
+        }
+      />
+
+      <Route
+        path="/Criar-Reuniao"
+        element={
+          <RequireAuth>
+            <CreateMeet />
           </RequireAuth>
         }
       />
